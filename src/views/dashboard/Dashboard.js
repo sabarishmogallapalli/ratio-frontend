@@ -94,13 +94,13 @@ const Dashboard = () => {
           'leg curl',
         ]
 
-        let upper = 0
-        let lower = 0
+        // let upper = 0
+        // let lower = 0
 
-        data.forEach((log) => {
-          if (upperLifts.some((u) => log.exercise_name.includes(u))) upper++
-          else if (lowerLifts.some((l) => log.exercise_name.includes(l))) lower++
-        })
+        // data.forEach((log) => {
+        //   if (upperLifts.some((u) => log.exercise_name.includes(u))) upper++
+        //   else if (lowerLifts.some((l) => log.exercise_name.includes(l))) lower++
+        // })
       }
     }
 
