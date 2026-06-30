@@ -62,45 +62,6 @@ const Dashboard = () => {
 
       if (!error && data) {
         setRecentExercises(data.slice(0, 6))
-
-        const upperLifts = [
-          'flat dumbbell press',
-          'cable fly',
-          'lat pulldown',
-          'overhead cable tricep extension',
-          'machine lateral raise',
-          'high incline smith press',
-          'smith machine press',
-          'incline smith',
-          't-bar row',
-          'supported row',
-          'ez-bar bicep curl',
-          'bicep curl',
-          'ez-bar',
-          'cable crunch',
-        ]
-        const lowerLifts = [
-          'dumbbell romanian deadlift',
-          'romanian deadlift',
-          'rdl',
-          'dumbbell step up',
-          'step up',
-          'seated leg press toe-press',
-          'toe-press',
-          'calf raise',
-          'hack squat',
-          'barbell back squat',
-          'seated leg curl',
-          'leg curl',
-        ]
-
-        // let upper = 0
-        // let lower = 0
-
-        // data.forEach((log) => {
-        //   if (upperLifts.some((u) => log.exercise_name.includes(u))) upper++
-        //   else if (lowerLifts.some((l) => log.exercise_name.includes(l))) lower++
-        // })
       }
     }
 
