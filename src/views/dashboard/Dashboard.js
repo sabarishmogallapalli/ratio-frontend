@@ -26,7 +26,6 @@ import { supabase } from '../../supabaseClient.js'
 
 const Dashboard = () => {
   // ALL STATE MUST BE INSIDE THE COMPONENT!
-  const [stats, setStats] = useState({ upperCount: 0, lowerCount: 0, total: 1 })
   const [recentExercises, setRecentExercises] = useState([])
   const [timeFilter, setTimeFilter] = useState('Month')
   const [splitFilter, setSplitFilter] = useState('All')
@@ -41,7 +40,6 @@ const Dashboard = () => {
 
   const weeklyProgress = React.useMemo(() => {
     return Object.keys(weeklyTotals).map((day) => {
-      const data = weeklyTotals[day]
       return {
         day: day,
         pCal: Math.min(Math.round((weeklyTotals[day].calories / macroTargets.calories) * 100), 100),
@@ -55,7 +53,6 @@ const Dashboard = () => {
   const [recentMeals, setRecentMeals] = useState([])
 
   const [dailyTotals, setDailyTotals] = useState({ calories: 0, protein: 0, carbs: 0, fat: 0 })
-  const [refreshTrigger, setRefreshTrigger] = useState(0)
   useEffect(() => {
     async function fetchDashboardStats() {
       const { data, error } = await supabase
