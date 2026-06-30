@@ -1,5 +1,6 @@
 import React from 'react'
 import { CFooter } from '@coreui/react'
+import setRefreshTrigger from 'src/views/dashboard/Dashboard'
 
 const AppFooter = () => {
   return (

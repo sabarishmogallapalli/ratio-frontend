@@ -1,11 +1,93 @@
-import React, { useEffect, useRef } from 'react'
-
+import React, { useEffect, useRef, useState } from 'react'
+import PropTypes from 'prop-types'
 import { CChartLine } from '@coreui/react-chartjs'
 import { getStyle } from '@coreui/utils'
+import { supabase } from '../../supabaseClient.js'
 
-const MainChart = () => {
+const MainChart = ({ timeFilter, splitFilter }) => {
   const chartRef = useRef(null)
+  const [chartLabels, setChartLabels] = useState([])
+  const [chartDataPoints, setChartDataPoints] = useState([])
 
+  useEffect(() => {
+    async function fetchFilteredData() {
+      const now = new Date()
+      let startDate = new Date()
+
+      if (timeFilter === 'Day') startDate.setDate(now.getDate() - 1)
+      else if (timeFilter === 'Week') startDate.setDate(now.getDate() - 7)
+      else if (timeFilter === 'Month') startDate.setMonth(now.getMonth() - 1)
+      else if (timeFilter === 'Year') startDate.setFullYear(now.getFullYear() - 1)
+
+      // 1. Start a basic query
+      let query = supabase
+        .from('exercise_logs')
+        .select('*')
+        .gte('created_at', startDate.toISOString())
+        .order('created_at', { ascending: true })
+
+      const upperLifts = [
+        'flat dumbbell press',
+        'flat db press',
+        'cable fly',
+        'lat pulldown',
+        'overhead cable tricep extension',
+        'machine lateral raise',
+        'high incline smith press',
+        'smith machine press',
+        'incline smith',
+        't-bar row',
+        'supported row',
+        'ez-bar bicep curl',
+        'bicep curl',
+        'ez-bar',
+        'cable crunch',
+      ]
+      const lowerLifts = [
+        'dumbbell romanian deadlift',
+        'romanian deadlift',
+        'rdl',
+        'dumbbell step up',
+        'step up',
+        'seated leg press toe-press',
+        'toe-press',
+        'calf raise',
+        'hack squat',
+        'barbell back squat',
+        'seated leg curl',
+        'leg curl',
+      ]
+
+      // 2. Apply split filter using the full arrays!
+      if (splitFilter === 'Upper') {
+        query = query.in('exercise_name', upperLifts)
+      } else if (splitFilter === 'Lower') {
+        query = query.in('exercise_name', lowerLifts)
+      }
+
+      const { data, error } = await query
+      if (!error && data) {
+        // Group the data by date and find the max weight lifted that day
+        const groupedData = {}
+        data.forEach((log) => {
+          const dateStr = new Date(log.created_at).toLocaleDateString([], {
+            month: 'short',
+            day: 'numeric',
+          })
+          if (!groupedData[dateStr] || log.weight > groupedData[dateStr]) {
+            groupedData[dateStr] = log.weight
+          }
+        })
+
+        setChartLabels(Object.keys(groupedData))
+        setChartDataPoints(Object.values(groupedData))
+      }
+    }
+
+    fetchFilteredData()
+  }, [timeFilter, splitFilter])
+
+  // CoreUI styling effect
   useEffect(() => {
     document.documentElement.addEventListener('ColorSchemeChange', () => {
       if (chartRef.current) {
@@ -26,57 +108,22 @@ const MainChart = () => {
     })
   }, [chartRef])
 
-  const random = () => Math.round(Math.random() * 100)
-
   return (
     <>
       <CChartLine
         ref={chartRef}
         style={{ height: '300px', marginTop: '40px' }}
         data={{
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+          labels: chartLabels.length > 0 ? chartLabels : ['No Data'],
           datasets: [
             {
-              label: 'My First dataset',
+              label: 'Highest Weight Lifted (lbs)',
               backgroundColor: `rgba(${getStyle('--cui-info-rgb')}, .1)`,
               borderColor: getStyle('--cui-info'),
               pointHoverBackgroundColor: getStyle('--cui-info'),
               borderWidth: 2,
-              data: [
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-              ],
+              data: chartDataPoints.length > 0 ? chartDataPoints : [0],
               fill: true,
-            },
-            {
-              label: 'My Second dataset',
-              backgroundColor: 'transparent',
-              borderColor: getStyle('--cui-success'),
-              pointHoverBackgroundColor: getStyle('--cui-success'),
-              borderWidth: 2,
-              data: [
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-                random(50, 200),
-              ],
-            },
-            {
-              label: 'My Third dataset',
-              backgroundColor: 'transparent',
-              borderColor: getStyle('--cui-danger'),
-              pointHoverBackgroundColor: getStyle('--cui-danger'),
-              borderWidth: 1,
-              borderDash: [8, 5],
-              data: [65, 65, 65, 65, 65, 65, 65],
             },
           ],
         }}
@@ -105,7 +152,6 @@ const MainChart = () => {
               grid: {
                 color: getStyle('--cui-border-color-translucent'),
               },
-              max: 250,
               ticks: {
                 color: getStyle('--cui-body-color'),
                 maxTicksLimit: 5,
@@ -118,16 +164,21 @@ const MainChart = () => {
               tension: 0.4,
             },
             point: {
-              radius: 0,
+              radius: 4,
               hitRadius: 10,
               hoverRadius: 4,
-              hoverBorderWidth: 3,
             },
           },
         }}
       />
     </>
   )
+}
+
+// Satisfy the ESLint props validation requirement
+MainChart.propTypes = {
+  timeFilter: PropTypes.string,
+  splitFilter: PropTypes.string,
 }
 
 export default MainChart
