@@ -101,12 +101,6 @@ const Dashboard = () => {
           if (upperLifts.some((u) => log.exercise_name.includes(u))) upper++
           else if (lowerLifts.some((l) => log.exercise_name.includes(l))) lower++
         })
-
-        setStats({
-          upperCount: upper,
-          lowerCount: lower,
-          total: data.length > 0 ? data.length : 1,
-        })
       }
     }
 
