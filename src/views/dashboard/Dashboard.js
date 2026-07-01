@@ -63,7 +63,7 @@ const Dashboard = () => {
         .select('created_at, weight, reps')
         .eq('exercise_name', selectedExercise)
         .order('created_at', { ascending: true })
-    if (data) setProgressionData(data)
+      if (data) setProgressionData(data)
     }
     async function fetchDashboardStats() {
       const { data, error } = await supabase
