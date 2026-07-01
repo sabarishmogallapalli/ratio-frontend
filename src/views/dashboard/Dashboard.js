@@ -2,8 +2,6 @@ import classNames from 'classnames'
 import React, { useState, useEffect } from 'react'
 
 import {
-  CButton,
-  CButtonGroup,
   CCard,
   CCardBody,
   CCardFooter,
@@ -22,13 +20,11 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilFire, cilBurger, cilFastfood, cilDrop } from '@coreui/icons'
 import ProgressionChart from './ProgressionChart'
-import MainChart from './MainChart'
 import { supabase } from '../../supabaseClient.js'
 
 const Dashboard = () => {
   // ALL STATE MUST BE INSIDE THE COMPONENT!
   const [recentExercises, setRecentExercises] = useState([])
-  const [timeFilter, setTimeFilter] = useState('Month')
   const [splitFilter, setSplitFilter] = useState('All')
   const [weeklyTotals, setWeeklyTotals] = useState({})
 
