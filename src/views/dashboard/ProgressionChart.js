@@ -13,4 +13,6 @@ const ProgressionChart = ({ exerciseName, data }) => {
   };
 
   return <CChartLine data={chartData} />;
-};
+}
+
+export default ProgressionChart
