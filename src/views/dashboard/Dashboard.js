@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import React, { useState, useEffect } from 'react'
 
 import {
@@ -25,7 +24,6 @@ import { supabase } from '../../supabaseClient.js'
 const Dashboard = () => {
   // ALL STATE MUST BE INSIDE THE COMPONENT!
   const [recentExercises, setRecentExercises] = useState([])
-  const [splitFilter, setSplitFilter] = useState('All')
   const [weeklyTotals, setWeeklyTotals] = useState({})
 
   const [macroTargets, setMacroTargets] = useState({
@@ -181,23 +179,6 @@ const Dashboard = () => {
       percent: Math.min(Math.round((dailyTotals.fat / macroTargets.fat) * 100) || 0, 100),
       value: `${dailyTotals.fat}g / ${macroTargets.fat}g`,
       color: 'success',
-    },
-  ]
-
-  const dynamicProgress = [
-    {
-      title: 'Upper Body',
-      // value: `${stats.upperCount} Lifts`,
-      // percent: Math.round((stats.upperCount / stats.total) * 100),
-      color: 'primary',
-      filterValue: 'Upper',
-    },
-    {
-      title: 'Lower Body',
-      // value: `${stats.lowerCount} Lifts`,
-      // percent: Math.round((stats.lowerCount / stats.total) * 100),
-      color: 'secondary',
-      filterValue: 'Lower',
     },
   ]
 
