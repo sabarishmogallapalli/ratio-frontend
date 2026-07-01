@@ -223,15 +223,15 @@ const Dashboard = () => {
                   Overhead Cable Tricep Extension
                 </option>
                 <option value="machine lateral raise">Machine Lateral Raise</option>
-                <option value="high incline smith press">high incline smith press</option>
-                <option value="t-bar row">t-bar row</option>
-                <option value="ez-bar bicep curl">ez-bar bicep curl</option>
-                <option value="cable crunch">cable crunch</option>
-                <option value="dumbbell romanian deadlift">dumbbell romanian deadlift</option>
-                <option value="dumbbell step up">dumbbell step up</option>
-                <option value="seated leg press toe-press">seated leg press toe-press</option>
+                <option value="high incline smith press">High Incline Smith Press</option>
+                <option value="t-bar row">T-Bar Row</option>
+                <option value="ez-bar bicep curl">Ez-Bar Bicep Curl</option>
+                <option value="cable crunch">Cable Crunch</option>
+                <option value="dumbbell romanian deadlift">Dumbbell Romanian Deadlift</option>
+                <option value="dumbbell step up">Dumbbell Step Up</option>
+                <option value="seated leg press toe-press">Seated Leg Press Toe-Press</option>
                 <option value="hack squat">Hack Squat</option>
-                <option value="seated leg curl">seated leg curl</option>
+                <option value="seated leg curl">Seated Leg Curl</option>
                 {/* Add more options here as needed */}
               </CFormSelect>
               {/* <CButtonGroup className="float-end me-3">
@@ -260,7 +260,7 @@ const Dashboard = () => {
             xl={{ cols: 5 }}
             className="mb-2 text-center"
           >
-            {dynamicProgress.map((item, index, items) => (
+            {/* {dynamicProgress.map((item, index, items) => (
               <CCol
                 style={{ cursor: 'pointer', opacity: splitFilter === item.filterValue ? 1 : 0.5 }}
                 className={classNames({
@@ -273,11 +273,11 @@ const Dashboard = () => {
               >
                 <div className="text-body-secondary">{item.title}</div>
                 <div className="fw-semibold text-truncate">
-                  {/* {item.value} ({item.percent}%) */}
+                  {item.value} ({item.percent}%)
                 </div>
                 <CProgress thin className="mt-2" color={item.color} value={item.percent} />
               </CCol>
-            ))}
+            ))} */}
           </CRow>
         </CCardFooter>
         <CTable align="middle" className="mb-0 border" hover responsive>
