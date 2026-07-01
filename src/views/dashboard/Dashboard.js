@@ -52,13 +52,25 @@ const Dashboard = () => {
 
   const [recentMeals, setRecentMeals] = useState([])
 
+  const [selectedExercise, setSelectedExercise] = useState('flat dumbbell press')
+const [progressionData, setProgressionData] = useState([])
   const [dailyTotals, setDailyTotals] = useState({ calories: 0, protein: 0, carbs: 0, fat: 0 })
   useEffect(() => {
+    async function fetchProgression() {
+    const { data } = await supabase
+      .from('exercise_logs')
+      .select('created_at, weight, reps')
+      .eq('exercise_name', selectedExercise)
+      .order('created_at', { ascending: true })
+    
+    if (data) setProgressionData(data)
+  }
     async function fetchDashboardStats() {
       const { data, error } = await supabase
         .from('exercise_logs')
         .select('*')
-        .order('created_at', { ascending: false })
+        .eq('exercise_name', selectedExercise)
+        .order('created_at', { ascending: true })
 
       if (!error && data) {
         setRecentExercises(data.slice(0, 6))
@@ -134,6 +146,7 @@ const Dashboard = () => {
     fetchDashboardStats()
     fetchFoodLogs()
     fetchWeeklyFoodLogs()
+    fetchProgression()
 
     const interval = setInterval(() => {
       fetchDashboardStats()
@@ -142,7 +155,7 @@ const Dashboard = () => {
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [selectedExercise])
 
   const dynamicMacros = [
     {
@@ -196,14 +209,34 @@ const Dashboard = () => {
     <>
       <CCard className="mb-4">
         <CCardBody>
-          <CRow>
-            <CCol sm={5}>
+          <CRow className="mb-3">
+            <CCol sm={6}>
               <h4 id="traffic" className="card-title mb-0">
                 Exercise
               </h4>
             </CCol>
             <CCol sm={7} className="d-none d-md-block">
-              <CButtonGroup className="float-end me-3">
+              <CFormSelect 
+                value={selectedExercise} 
+                onChange={(e) => setSelectedExercise(e.target.value)}
+              >
+                <option value="flat dumbbell press">Flat Dumbbell Press</option>
+                <option value="cable fly">Cable Fly</option>
+                <option value="lat pulldown">Lat Pulldown</option>
+                <option value="overhead cable tricep extension">Overhead Cable Tricep Extension</option>
+                <option value="machine lateral raise">Machine Lateral Raise</option>
+                <option value="high incline smith press">high incline smith press</option>
+                <option value="t-bar row">t-bar row</option>
+                <option value="ez-bar bicep curl">ez-bar bicep curl</option>
+                <option value="cable crunch">cable crunch</option>
+                <option value="dumbbell romanian deadlift">dumbbell romanian deadlift</option>
+                <option value="dumbbell step up">dumbbell step up</option>
+                <option value="seated leg press toe-press">seated leg press toe-press</option>
+                <option value="hack squat">Hack Squat</option>
+                <option value="seated leg curl">seated leg curl</option>
+                {/* Add more options here as needed */}
+              </CFormSelect>
+              {/* <CButtonGroup className="float-end me-3">
                 {['Day', 'Week', 'Month', 'Year'].map((value) => (
                   <CButton
                     color="outline-secondary"
@@ -215,10 +248,11 @@ const Dashboard = () => {
                     {value}
                   </CButton>
                 ))}
-              </CButtonGroup>
+              </CButtonGroup> */}
             </CCol>
           </CRow>
-          <MainChart timeFilter={timeFilter} splitFilter={splitFilter} />
+          <ProgressionChart data={progressionData} />
+          {/* <MainChart timeFilter={timeFilter} splitFilter={splitFilter} /> */}
         </CCardBody>
         <CCardFooter>
           <CRow
