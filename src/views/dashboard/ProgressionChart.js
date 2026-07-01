@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { CChartLine } from '@coreui/react-chartjs';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { CChartLine } from '@coreui/react-chartjs'
 
 const ProgressionChart = ({ exerciseName, data }) => {
   // Logic: Group 'data' by date, take the MAX weight for that date
@@ -14,10 +14,10 @@ const ProgressionChart = ({ exerciseName, data }) => {
         fill: false,
       },
     ],
-  };
+  }
 
-  return <CChartLine data={chartData} />;
-};
+  return <CChartLine data={chartData} />
+}
 
 ProgressionChart.propTypes = {
   exerciseName: PropTypes.string,
@@ -25,8 +25,8 @@ ProgressionChart.propTypes = {
     PropTypes.shape({
       created_at: PropTypes.string.isRequired,
       weight: PropTypes.number.isRequired,
-    })
+    }),
   ).isRequired,
-};
+}
 
-export default ProgressionChart;
+export default ProgressionChart
