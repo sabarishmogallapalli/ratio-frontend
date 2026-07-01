@@ -9,6 +9,7 @@ import {
   CCardFooter,
   CCardHeader,
   CCol,
+  CFormSelect,
   CProgress,
   CRow,
   CTable,
@@ -20,7 +21,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilFire, cilBurger, cilFastfood, cilDrop } from '@coreui/icons'
-
+import ProgressionChart from './ProgressionChart'
 import MainChart from './MainChart'
 import { supabase } from '../../supabaseClient.js'
 
@@ -53,18 +54,17 @@ const Dashboard = () => {
   const [recentMeals, setRecentMeals] = useState([])
 
   const [selectedExercise, setSelectedExercise] = useState('flat dumbbell press')
-const [progressionData, setProgressionData] = useState([])
+  const [progressionData, setProgressionData] = useState([])
   const [dailyTotals, setDailyTotals] = useState({ calories: 0, protein: 0, carbs: 0, fat: 0 })
   useEffect(() => {
     async function fetchProgression() {
-    const { data } = await supabase
-      .from('exercise_logs')
-      .select('created_at, weight, reps')
-      .eq('exercise_name', selectedExercise)
-      .order('created_at', { ascending: true })
-    
+      const { data } = await supabase
+        .from('exercise_logs')
+        .select('created_at, weight, reps')
+        .eq('exercise_name', selectedExercise)
+        .order('created_at', { ascending: true })
     if (data) setProgressionData(data)
-  }
+    }
     async function fetchDashboardStats() {
       const { data, error } = await supabase
         .from('exercise_logs')
@@ -216,14 +216,16 @@ const [progressionData, setProgressionData] = useState([])
               </h4>
             </CCol>
             <CCol sm={7} className="d-none d-md-block">
-              <CFormSelect 
-                value={selectedExercise} 
+              <CFormSelect
+                value={selectedExercise}
                 onChange={(e) => setSelectedExercise(e.target.value)}
               >
                 <option value="flat dumbbell press">Flat Dumbbell Press</option>
                 <option value="cable fly">Cable Fly</option>
                 <option value="lat pulldown">Lat Pulldown</option>
-                <option value="overhead cable tricep extension">Overhead Cable Tricep Extension</option>
+                <option value="overhead cable tricep extension">
+                  Overhead Cable Tricep Extension
+                </option>
                 <option value="machine lateral raise">Machine Lateral Raise</option>
                 <option value="high incline smith press">high incline smith press</option>
                 <option value="t-bar row">t-bar row</option>
