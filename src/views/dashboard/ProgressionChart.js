@@ -4,19 +4,53 @@ import { CChartLine } from '@coreui/react-chartjs'
 
 const ProgressionChart = ({ exerciseName, data }) => {
   // Logic: Group 'data' by date, take the MAX weight for that date
+
+  const groupedData = {}
+  data.forEach((log) => {
+    const dateStr = new Date(log.created_at).toLocaleDateString()
+    if (!groupedData[dateStr] || log.weight > groupedData[dateStr]) {
+      groupedData[dateStr] = log.weight
+    }
+  })
+
+  const weights = Object.values(groupedData)
+
+  let minWeight = weights.length > 0 ? Math.min(...weights) : 0
+  let maxWeight = weights.length > 0 ? Math.max(...weights) : 100
+
+  if (minWeight === maxWeight) {
+    //fallback if only one session is logged
+    minWeight -= 5
+    maxWeight += 5
+  }
+
   const chartData = {
-    labels: [...new Set(data.map((log) => log.created_at.split('T')[0]))],
+    labels: Object.keys(groupedData),
     datasets: [
       {
         label: 'Weight (lbs)',
-        data: data.map((log) => log.weight),
+        data: Object.values(groupedData),
         borderColor: '#321fdb',
         fill: false,
       },
     ],
   }
 
-  return <CChartLine data={chartData} />
+  return (
+    <CChartLine
+      data={chartData}
+      options={{
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            min: minWeight,
+            max: maxWeight,
+          },
+        },
+      }}
+      style={{ height: '300px', marginTop: '40px' }}
+    />
+  )
 }
 
 ProgressionChart.propTypes = {

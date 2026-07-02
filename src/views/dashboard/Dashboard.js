@@ -72,8 +72,8 @@ const Dashboard = () => {
     }
 
     async function fetchFoodLogs() {
-      const startDate = new Date()
-      startDate.setHours(0, 0, 0, 0)
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
       const { data: mealData, error: mealError } = await supabase
         .from('food_logs')
         .select('*')
@@ -83,12 +83,17 @@ const Dashboard = () => {
       if (!mealError && mealData) {
         console.log('Fetched Meals:', mealData)
         setRecentMeals(mealData.slice(0, 6))
-        // Breaking these into individual declarations keeps Prettier happy!
+
+        const todaysMeals = mealData.filter((meal) => {
+          const mealDate = new Date(meal.created_at)
+          return mealDate >= today
+        })
+
         let cals = 0
         let pro = 0
         let carb = 0
         let f = 0
-        mealData.forEach((meal) => {
+        todaysMeals.forEach((meal) => {
           cals += meal.calories || 0
           pro += meal.protein || 0
           carb += meal.carbs || 0
@@ -186,13 +191,13 @@ const Dashboard = () => {
     <>
       <CCard className="mb-4">
         <CCardBody>
-          <CRow className="mb-3">
-            <CCol sm={6}>
+          <CRow className="mb-3 gap-2">
+            <CCol xs={12} sm={6}>
               <h4 id="traffic" className="card-title mb-0">
                 Exercise
               </h4>
             </CCol>
-            <CCol sm={7} className="d-none d-md-block">
+            <CCol xs={12} sm={7}>
               <CFormSelect
                 value={selectedExercise}
                 onChange={(e) => setSelectedExercise(e.target.value)}
