@@ -202,22 +202,42 @@ const Dashboard = () => {
                 value={selectedExercise}
                 onChange={(e) => setSelectedExercise(e.target.value)}
               >
-                <option value="flat dumbbell press">Flat Dumbbell Press</option>
-                <option value="cable fly">Cable Fly</option>
-                <option value="lat pulldown">Lat Pulldown</option>
-                <option value="overhead cable tricep extension">
-                  Overhead Cable Tricep Extension
+                <option value="cuffed behind-the-back lateral raise">
+                  Cuffed Behind-The-Back Lateral Raise
                 </option>
-                <option value="machine lateral raise">Machine Lateral Raise</option>
-                <option value="high incline smith press">High Incline Smith Press</option>
-                <option value="t-bar row">T-Bar Row</option>
-                <option value="ez-bar bicep curl">Ez-Bar Bicep Curl</option>
-                <option value="cable crunch">Cable Crunch</option>
-                <option value="dumbbell romanian deadlift">Dumbbell Romanian Deadlift</option>
-                <option value="dumbbell step up">Dumbbell Step Up</option>
-                <option value="seated leg press toe-press">Seated Leg Press Toe-Press</option>
-                <option value="hack squat">Hack Squat</option>
+                <option value="cross-body lat pull-around">Cross-Body Lat Pull-Around</option>
+                <option value="low incline smith machine press">
+                  Low Incline Smith Machine Press
+                </option>
+                <option value="chest-supported machine row">Chest-Supported Machine Row</option>
+                <option value="overhead cable tricep extensions (bar)">
+                  Overhead Cable Tricep Extensions (Bar)
+                </option>
+                <option value="straight-bar lat prayer">Straight-Bar Lat Prayer</option>
+                <option value="pec deck (with integrated partials)">
+                  Pec Deck (With Integrated Partials)
+                </option>
                 <option value="seated leg curl">Seated Leg Curl</option>
+                <option value="machine hip abduction">Machine Hip Abduction</option>
+                <option value="hack squat">Hack Squat</option>
+                <option value="leg extension">Leg Extension</option>
+                <option value="leg press calf press">Leg Press Calf Press</option>
+                <option value="super-rom overhand cable row">Super-Rom Overhand Cable Row</option>
+                <option value="machine shoulder press">Machine Shoulder Press</option>
+                <option value="assisted pull-up">Assisted Pull-Up</option>
+                <option value="paused assisted dip">Paused Assisted Dip</option>
+                <option value="inverse db zottman curl">Inverse Dumbbell Zottman Curl</option>
+                <option value="super-rom db lateral raise">Super-Rom Dumbbell Lateral Raise</option>
+                <option value="cable reverse fly (mechanical dropset)">
+                  Cable Reverse Fly (Mechanical Dropset)
+                </option>
+                <option value="lying leg curl">lying leg curl</option>
+                <option value="leg press">leg press</option>
+                <option value="paused barbell rdl">paused barbell rdl</option>
+                <option value="machine hip abduction">machine hip abduction</option>
+                <option value="sissy squat">sissy squat</option>
+                <option value="standing calf raise">standing calf raise</option>
+
                 {/* Add more options here as needed */}
               </CFormSelect>
               {/* <CButtonGroup className="float-end me-3">
