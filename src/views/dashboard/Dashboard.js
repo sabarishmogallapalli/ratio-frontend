@@ -231,12 +231,11 @@ const Dashboard = () => {
                 <option value="cable reverse fly (mechanical dropset)">
                   Cable Reverse Fly (Mechanical Dropset)
                 </option>
-                <option value="lying leg curl">lying leg curl</option>
-                <option value="leg press">leg press</option>
-                <option value="paused barbell rdl">paused barbell rdl</option>
-                <option value="machine hip abduction">machine hip abduction</option>
-                <option value="sissy squat">sissy squat</option>
-                <option value="standing calf raise">standing calf raise</option>
+                <option value="lying leg curl">Lying Leg Curl</option>
+                <option value="leg press">Leg Press</option>
+                <option value="paused barbell rdl">Paused Barbell Rdl</option>
+                <option value="sissy squat">Sissy Squat</option>
+                <option value="standing calf raise">Standing Calf Raise</option>
 
                 {/* Add more options here as needed */}
               </CFormSelect>
