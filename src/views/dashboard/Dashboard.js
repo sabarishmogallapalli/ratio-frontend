@@ -218,7 +218,7 @@ const Dashboard = () => {
                   Pec Deck (With Integrated Partials)
                 </option>
                 <option value="seated leg curl">Seated Leg Curl</option>
-                <option value="machine hip abduction">Machine Hip Abduction</option>
+                <option value="machine hip adduction">Machine Hip Adduction</option>
                 <option value="hack squat">Hack Squat</option>
                 <option value="leg extension">Leg Extension</option>
                 <option value="leg press calf press">Leg Press Calf Press</option>
