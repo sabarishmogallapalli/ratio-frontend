@@ -17,7 +17,7 @@ import {
   CTableRow,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilFire, cilBurger, cilFastfood, cilDrop } from '@coreui/icons'
+import { cilFire, cilBurger, cilFastfood, cilDrop, cilDelete } from '@coreui/icons'
 import ProgressionChart from './ProgressionChart'
 import { supabase } from '../../supabaseClient.js'
 
@@ -25,6 +25,7 @@ const Dashboard = () => {
   // ALL STATE MUST BE INSIDE THE COMPONENT!
   const [recentExercises, setRecentExercises] = useState([])
   const [weeklyTotals, setWeeklyTotals] = useState({})
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0])
 
   const [macroTargets, setMacroTargets] = useState({
     calories: 2500,
@@ -32,6 +33,26 @@ const Dashboard = () => {
     carbs: 250,
     fat: 75,
   })
+
+  const handleDeleteMeal = async (id) => {
+    const { error } = await supabase.from('food_logs').delete().eq('id', id)
+
+    if (!error) {
+      setRecentMeals(recentMeals.filter((meal) => meal.id !== id))
+    } else {
+      console.error('Supabase error deleting meal:', error)
+    }
+  }
+
+  const handleDeleteExercise = async (id) => {
+    const { error } = await supabase.from('exercise_logs').delete().eq('id', id)
+
+    if (!error) {
+      setRecentExercises(recentExercises.filter((ex) => ex.id !== id))
+    } else {
+      console.error('Supabase error deleting exercise:', error)
+    }
+  }
 
   const weeklyProgress = React.useMemo(() => {
     return Object.keys(weeklyTotals).map((day) => {
@@ -50,6 +71,7 @@ const Dashboard = () => {
   const [selectedExercise, setSelectedExercise] = useState('flat dumbbell press')
   const [progressionData, setProgressionData] = useState([])
   const [dailyTotals, setDailyTotals] = useState({ calories: 0, protein: 0, carbs: 0, fat: 0 })
+
   useEffect(() => {
     async function fetchProgression() {
       const { data } = await supabase
@@ -64,6 +86,8 @@ const Dashboard = () => {
         .from('exercise_logs')
         .select('*')
         .eq('exercise_name', selectedExercise)
+        .gte('created_at', `${selectedDate}T00:00:00`)
+        .lte('created_at', `${selectedDate}T23:59:59`)
         .order('created_at', { ascending: true })
 
       if (!error && data) {
@@ -77,23 +101,24 @@ const Dashboard = () => {
       const { data: mealData, error: mealError } = await supabase
         .from('food_logs')
         .select('*')
-        //.gte('created_at', startDate.toISOString())
+        .gte('created_at', `${selectedDate}T00:00:00`)
+        .lte('created_at', `${selectedDate}T23:59:59`)
         .order('created_at', { ascending: false })
 
       if (!mealError && mealData) {
         console.log('Fetched Meals:', mealData)
         setRecentMeals(mealData.slice(0, 6))
 
-        const todaysMeals = mealData.filter((meal) => {
-          const mealDate = new Date(meal.created_at)
-          return mealDate >= today
-        })
+        // const todaysMeals = mealData.filter((meal) => {
+        //   const mealDate = new Date(meal.created_at)
+        //   return mealDate >= today
+        // })
 
         let cals = 0
         let pro = 0
         let carb = 0
         let f = 0
-        todaysMeals.forEach((meal) => {
+        mealData.forEach((meal) => {
           cals += meal.calories || 0
           pro += meal.protein || 0
           carb += meal.carbs || 0
@@ -154,7 +179,7 @@ const Dashboard = () => {
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [selectedExercise])
+  }, [selectedExercise, selectedDate])
 
   const dynamicMacros = [
     {
@@ -189,6 +214,17 @@ const Dashboard = () => {
 
   return (
     <>
+      <CRow className="mb-3">
+        <CCol xs={12}>
+          <label>View Logs for:</label>
+          <input
+            type="date"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+            className="form-control"
+          />
+        </CCol>
+      </CRow>
       <CCard className="mb-4">
         <CCardBody>
           <CRow className="mb-3 gap-2">
@@ -290,6 +326,7 @@ const Dashboard = () => {
             <CTableRow>
               <CTableHeaderCell className="bg-body-tertiary">Exercise Log</CTableHeaderCell>
               <CTableHeaderCell className="bg-body-tertiary">Activity</CTableHeaderCell>
+              <CTableHeaderCell className="bg-body-tertiary"></CTableHeaderCell>
             </CTableRow>
           </CTableHead>
           <CTableBody>
@@ -305,6 +342,15 @@ const Dashboard = () => {
                   <div className="small text-body-secondary text-nowrap">Logged on</div>
                   <div className="fw-semibold text-nowrap">
                     {new Date(item.created_at).toLocaleDateString()}
+                  </div>
+                </CTableDataCell>
+                <CTableDataCell>
+                  <div className="small text-body-secondary text-nowrap">
+                    <CIcon
+                      icon={cilDelete}
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => handleDeleteExercise(item.id)}
+                    />
                   </div>
                 </CTableDataCell>
               </CTableRow>
@@ -376,6 +422,7 @@ const Dashboard = () => {
                     <CTableHeaderCell className="bg-body-tertiary">
                       <CIcon icon={cilDrop} />
                     </CTableHeaderCell>
+                    <CTableHeaderCell className="bg-body-tertiary"></CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
@@ -406,6 +453,13 @@ const Dashboard = () => {
                       </CTableDataCell>
                       <CTableDataCell className="text-center text-success">
                         {item.fat}g
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        <CIcon
+                          icon={cilDelete}
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => handleDeleteMeal(item.id)}
+                        />
                       </CTableDataCell>
                     </CTableRow>
                   ))}
