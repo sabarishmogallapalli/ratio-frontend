@@ -352,7 +352,7 @@ const Dashboard = () => {
                     </div>
                   </CTableDataCell>
                   <CTableDataCell>
-                    <div className="small text-body-secondary text-nowrap">
+                    <div className="small text-white text-nowrap">
                       <CIcon
                         icon={cilDelete}
                         style={{ cursor: 'pointer' }}
