@@ -30,8 +30,10 @@ const ProgressionChart = ({ exerciseName, data }) => {
       {
         label: 'Weight (lbs)',
         data: Object.values(groupedData),
-        borderColor: '#321fdb',
-        fill: false,
+        borderColor: '#ffffff',
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        pointBackgroundColor: '#ffffff',
+        fill: true,
       },
     ],
   }
@@ -42,9 +44,15 @@ const ProgressionChart = ({ exerciseName, data }) => {
       options={{
         maintainAspectRatio: false,
         scales: {
+          x: {
+            ticks: { color: 'rgba(255, 255, 255, 0.7)' }, // Light grey axis text
+            grid: { color: 'rgba(255, 255, 255, 0.1)' }, // Very faint grid lines
+          },
           y: {
             min: minWeight,
             max: maxWeight,
+            ticks: { color: 'rgba(255, 255, 255, 0.7)' },
+            grid: { color: 'rgba(255, 255, 255, 0.1)' },
           },
         },
       }}

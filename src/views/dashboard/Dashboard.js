@@ -214,18 +214,18 @@ const Dashboard = () => {
 
   return (
     <>
-      <CRow className="mb-3">
+      <CRow className="mb-3 text-white">
         <CCol xs={12}>
-          <label>View Logs for:</label>
+          <label></label>
           <input
             type="date"
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
-            className="form-control"
+            className="form-control bg-dark text-white border-secondary"
           />
         </CCol>
       </CRow>
-      <CCard className="mb-4">
+      <CCard className="mb-4 bg-dark text-white" style={{ borderColor: '#333' }}>
         <CCardBody>
           <CRow className="mb-3 gap-2">
             <CCol xs={12} sm={6}>
@@ -237,6 +237,7 @@ const Dashboard = () => {
               <CFormSelect
                 value={selectedExercise}
                 onChange={(e) => setSelectedExercise(e.target.value)}
+                className="text-white"
               >
                 <option value="cuffed behind-the-back lateral raise">
                   Cuffed Behind-The-Back Lateral Raise
@@ -321,150 +322,174 @@ const Dashboard = () => {
             ))} */}
           </CRow>
         </CCardFooter>
-        <CTable align="middle" className="mb-0 border" hover responsive>
-          <CTableHead className="text-nowrap">
-            <CTableRow>
-              <CTableHeaderCell className="bg-body-tertiary">Exercise Log</CTableHeaderCell>
-              <CTableHeaderCell className="bg-body-tertiary">Activity</CTableHeaderCell>
-              <CTableHeaderCell className="bg-body-tertiary"></CTableHeaderCell>
-            </CTableRow>
-          </CTableHead>
-          <CTableBody>
-            {recentExercises.map((item, index) => (
-              <CTableRow key={item.id || index}>
-                <CTableDataCell>
-                  <div className="fw-semibold">{item.exercise_name.toUpperCase()}</div>
-                  <div className="small text-body-secondary text-nowrap">
-                    {item.weight} lbs × {item.reps} reps (Set {item.set_number})
-                  </div>
-                </CTableDataCell>
-                <CTableDataCell>
-                  <div className="small text-body-secondary text-nowrap">Logged on</div>
-                  <div className="fw-semibold text-nowrap">
-                    {new Date(item.created_at).toLocaleDateString()}
-                  </div>
-                </CTableDataCell>
-                <CTableDataCell>
-                  <div className="small text-body-secondary text-nowrap">
-                    <CIcon
-                      icon={cilDelete}
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => handleDeleteExercise(item.id)}
-                    />
-                  </div>
-                </CTableDataCell>
+        <CCardBody>
+          <CTable
+            align="middle"
+            className="mb-0 border border-secondary"
+            hover
+            responsive
+            color="dark"
+          >
+            <CTableHead className="text-nowrap">
+              <CTableRow>
+                <CTableHeaderCell className="bg-black text-white">Exercise Log</CTableHeaderCell>
+                <CTableHeaderCell className="bg-black text-white">Activity</CTableHeaderCell>
+                <CTableHeaderCell className="bg-black text-white"></CTableHeaderCell>
               </CTableRow>
-            ))}
-          </CTableBody>
-        </CTable>
+            </CTableHead>
+            <CTableBody>
+              {recentExercises.map((item, index) => (
+                <CTableRow key={item.id || index}>
+                  <CTableDataCell>
+                    <div className="fw-semibold text-white">{item.exercise_name.toUpperCase()}</div>
+                    <div className="small text-light text-nowrap">
+                      {item.weight} lbs × {item.reps} reps (Set {item.set_number})
+                    </div>
+                  </CTableDataCell>
+                  <CTableDataCell>
+                    <div className="small text-light text-nowrap">Logged on</div>
+                    <div className="fw-semibold text-white text-nowrap">
+                      {new Date(item.created_at).toLocaleDateString()}
+                    </div>
+                  </CTableDataCell>
+                  <CTableDataCell>
+                    <div className="small text-body-secondary text-nowrap">
+                      <CIcon
+                        icon={cilDelete}
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => handleDeleteExercise(item.id)}
+                      />
+                    </div>
+                  </CTableDataCell>
+                </CTableRow>
+              ))}
+            </CTableBody>
+          </CTable>
+        </CCardBody>
       </CCard>
       <CRow>
         <CCol xs>
-          <CCard className="mb-4">
-            <CCardHeader>Food</CCardHeader>
+          <CCard className="mb-4" color="dark">
             <CCardBody>
               <CRow>
-                <CCol xs={12} md={6} xl={6}>
-                  {weeklyProgress.length === 0 ? (
-                    <div className="text-center text-body-secondary mt-5">
-                      <em>No meals logged in the last 7 days.</em>
-                    </div>
-                  ) : (
-                    weeklyProgress.map((item, index) => (
-                      <div className="progress-group mb-4" key={index}>
-                        <div className="progress-group-prepend">
-                          <span className="text-body-secondary small">{item.day}</span>
-                        </div>
-                        <div className="progress-group-bars">
-                          <CProgress thin color="info" value={item.pCal} />
-                          <CProgress thin color="danger" value={item.pPro} />
-                          <CProgress thin color="warning" value={item.pCarb} />
-                          <CProgress thin color="success" value={item.pFat} />
-                        </div>
-                      </div>
-                    ))
-                  )}
+                <CCol xs={12} sm={6}>
+                  <h4 id="traffic" className="card-title mb-0 text-white">
+                    Food
+                  </h4>
                 </CCol>
-                <CCol xs={12} md={6} xl={6}>
-                  {dynamicMacros.map((item, index) => (
-                    <div className="progress-group" key={index}>
-                      <div className="progress-group-header">
-                        <CIcon className="me-2" icon={item.icon} size="lg" />
-                        <span>{item.title}</span>
-                        <span className="ms-auto fw-semibold">
-                          {item.value}{' '}
-                          <span className="text-body-secondary small">({item.percent}%)</span>
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <CProgress thin color={item.color} value={item.percent} />
-                      </div>
-                    </div>
-                  ))}
-                </CCol>
+                <CCardBody>
+                  <CRow>
+                    <CCol xs={12} md={6} xl={6}>
+                      {weeklyProgress.length === 0 ? (
+                        <div className="text-center mt-5 text-white">
+                          <em>No meals logged in the last 7 days.</em>
+                        </div>
+                      ) : (
+                        weeklyProgress.map((item, index) => (
+                          <div className="progress-group mb-4" key={index}>
+                            <div className="progress-group-prepend">
+                              <span className="text-white small">{item.day}</span>
+                            </div>
+                            <div className="progress-group-bars">
+                              <CProgress thin color="info" value={item.pCal} />
+                              <CProgress thin color="danger" value={item.pPro} />
+                              <CProgress thin color="warning" value={item.pCarb} />
+                              <CProgress thin color="success" value={item.pFat} />
+                            </div>
+                          </div>
+                        ))
+                      )}
+                    </CCol>
+                    <CCol xs={12} md={6} xl={6}>
+                      {dynamicMacros.map((item, index) => (
+                        <div className="progress-group" key={index}>
+                          <div className="progress-group-header">
+                            <CIcon className="me-2 text-white" icon={item.icon} size="lg" />
+                            <span className="text-white">{item.title}</span>
+                            <span className="ms-auto fw-semibold text-white">
+                              {item.value}{' '}
+                              <span className="small text-white">({item.percent}%)</span>
+                            </span>
+                          </div>
+                          <div className="progress-group-bars">
+                            <CProgress thin color={item.color} value={item.percent} />
+                          </div>
+                        </div>
+                      ))}
+                    </CCol>
+                  </CRow>
+
+                  <br />
+
+                  <CTable
+                    align="middle"
+                    className="mb-0 border border-secondary"
+                    hover
+                    responsive
+                    color="dark"
+                  >
+                    <CTableHead className="text-nowrap">
+                      <CTableRow>
+                        <CTableHeaderCell className="bg-black text-white">
+                          Food Log
+                        </CTableHeaderCell>
+                        <CTableHeaderCell className="bg-black text-center">
+                          <CIcon icon={cilFire} />
+                        </CTableHeaderCell>
+                        <CTableHeaderCell className="bg-black">
+                          <CIcon icon={cilBurger} />
+                        </CTableHeaderCell>
+                        <CTableHeaderCell className="bg-black text-center">
+                          <CIcon icon={cilFastfood} />
+                        </CTableHeaderCell>
+                        <CTableHeaderCell className="bg-black">
+                          <CIcon icon={cilDrop} />
+                        </CTableHeaderCell>
+                        <CTableHeaderCell className="bg-black"></CTableHeaderCell>
+                      </CTableRow>
+                    </CTableHead>
+                    <CTableBody>
+                      {recentMeals.map((item, index) => (
+                        <CTableRow key={item.id || index}>
+                          <CTableDataCell>
+                            <div className="fw-semibold">
+                              {item.food_name.charAt(0).toUpperCase() + item.food_name.slice(1)}
+                            </div>
+                            <div className="small text-white text-nowrap">
+                              <span>{item.meal_type.toUpperCase()}</span> |{' '}
+                              {new Date(item.created_at).toLocaleDateString([], {
+                                month: 'short',
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit',
+                              })}
+                            </div>
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center fw-semibold text-danger">
+                            {item.calories}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center fw-semibold text-info">
+                            {item.protein}g
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center text-warning">
+                            {item.carbs}g
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center text-success">
+                            {item.fat}g
+                          </CTableDataCell>
+                          <CTableDataCell>
+                            <CIcon
+                              icon={cilDelete}
+                              style={{ cursor: 'pointer' }}
+                              onClick={() => handleDeleteMeal(item.id)}
+                            />
+                          </CTableDataCell>
+                        </CTableRow>
+                      ))}
+                    </CTableBody>
+                  </CTable>
+                </CCardBody>
               </CRow>
-
-              <br />
-
-              <CTable align="middle" className="mb-0 border" hover responsive>
-                <CTableHead className="text-nowrap">
-                  <CTableRow>
-                    <CTableHeaderCell className="bg-body-tertiary">Food Log</CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary text-center">
-                      <CIcon icon={cilFire} />
-                    </CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary">
-                      <CIcon icon={cilBurger} />
-                    </CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary text-center">
-                      <CIcon icon={cilFastfood} />
-                    </CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary">
-                      <CIcon icon={cilDrop} />
-                    </CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary"></CTableHeaderCell>
-                  </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                  {recentMeals.map((item, index) => (
-                    <CTableRow key={item.id || index}>
-                      <CTableDataCell>
-                        <div className="fw-semibold">
-                          {item.food_name.charAt(0).toUpperCase() + item.food_name.slice(1)}
-                        </div>
-                        <div className="small text-body-secondary text-nowrap">
-                          <span>{item.meal_type.toUpperCase()}</span> |{' '}
-                          {new Date(item.created_at).toLocaleDateString([], {
-                            month: 'short',
-                            day: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          })}
-                        </div>
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center fw-semibold text-danger">
-                        {item.calories}
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center fw-semibold text-info">
-                        {item.protein}g
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center text-warning">
-                        {item.carbs}g
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center text-success">
-                        {item.fat}g
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <CIcon
-                          icon={cilDelete}
-                          style={{ cursor: 'pointer' }}
-                          onClick={() => handleDeleteMeal(item.id)}
-                        />
-                      </CTableDataCell>
-                    </CTableRow>
-                  ))}
-                </CTableBody>
-              </CTable>
             </CCardBody>
           </CCard>
         </CCol>
