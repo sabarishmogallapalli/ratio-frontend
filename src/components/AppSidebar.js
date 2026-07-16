@@ -37,8 +37,15 @@ const AppSidebar = () => {
     >
       <CSidebarHeader className="border-bottom">
         <CSidebarBrand to="/">
-          <CIcon customClassName="sidebar-brand-full" icon={logo} height={32} />
-          <CIcon customClassName="sidebar-brand-narrow" icon={sygnet} height={32} />
+          {/* <CIcon customClassName="sidebar-brand-full" icon={logo} height={32} />
+          <CIcon customClassName="sidebar-brand-narrow" icon={sygnet} height={32} /> */}
+          <img
+            src={'../assets/img/favicon.png'}
+            alt="Dashboard Logo"
+            height={35}
+            className="sidebar-brand-full"
+            style={{ objectFit: 'contain' }}
+          />
         </CSidebarBrand>
         <CCloseButton
           className="d-lg-none"
