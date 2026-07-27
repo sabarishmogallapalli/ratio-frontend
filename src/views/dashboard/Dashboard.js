@@ -28,9 +28,9 @@ const Dashboard = () => {
 
   const [macroTargets, setMacroTargets] = useState({
     calories: 2500,
-    protein: 156,
-    carbs: 250,
-    fat: 75,
+    protein: 150,
+    carbs: 200,
+    fat: 65,
   })
 
   const handleDeleteMeal = async (id) => {
@@ -72,6 +72,24 @@ const Dashboard = () => {
   const [dailyTotals, setDailyTotals] = useState({ calories: 0, protein: 0, carbs: 0, fat: 0 })
 
   useEffect(() => {
+    async function fetchUserProfile() {
+      const { data: profileData, error: profileError } = await supabase
+        .from('user_profiles')
+        .select('*')
+        .limit(1)
+
+      if (!profileError && profileData && profileData.length > 0) {
+        setMacroTargets({
+          calories: profileData[0].target_calories,
+          protein: profileData[0].target_protein,
+          carbs: profileData[0].target_carbs,
+          fat: profileData[0].target_fat,
+        })
+      } else if (profileError) {
+        console.error('Error fetching profile:', profileError)
+      }
+    }
+
     async function fetchProgression() {
       const { data } = await supabase
         .from('exercise_logs')
@@ -172,11 +190,13 @@ const Dashboard = () => {
     fetchFoodLogs()
     fetchWeeklyFoodLogs()
     fetchProgression()
+    fetchUserProfile()
 
     const interval = setInterval(() => {
       fetchDashboardStats()
       fetchFoodLogs()
       fetchWeeklyFoodLogs()
+      fetchUserProfile()
     }, 5000)
 
     return () => clearInterval(interval)
