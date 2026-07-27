@@ -81,12 +81,14 @@ const Dashboard = () => {
       if (data) setProgressionData(data)
     }
     async function fetchDashboardStats() {
+      const startOfDay = new Date(`${selectedDate}T00:00:00-05:00`).toISOString()
+      const endOfDay = new Date(`${selectedDate}T23:59:59-05:00`).toISOString()
       const { data, error } = await supabase
         .from('exercise_logs')
         .select('*')
         .eq('exercise_name', selectedExercise)
-        .gte('created_at', `${selectedDate}T00:00:00`)
-        .lte('created_at', `${selectedDate}T23:59:59`)
+        .gte('created_at', startOfDay)
+        .lte('created_at', endOfDay)
         .order('created_at', { ascending: true })
 
       if (!error && data) {
@@ -95,13 +97,13 @@ const Dashboard = () => {
     }
 
     async function fetchFoodLogs() {
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
+      const startOfDay = new Date(`${selectedDate}T00:00:00-05:00`).toISOString()
+      const endOfDay = new Date(`${selectedDate}T23:59:59-05:00`).toISOString()
       const { data: mealData, error: mealError } = await supabase
         .from('food_logs')
         .select('*')
-        .gte('created_at', `${selectedDate}T00:00:00`)
-        .lte('created_at', `${selectedDate}T23:59:59`)
+        .gte('created_at', startOfDay)
+        .lte('created_at', endOfDay)
         .order('created_at', { ascending: false })
 
       if (!mealError && mealData) {
