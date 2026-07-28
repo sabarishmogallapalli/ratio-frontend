@@ -19,6 +19,7 @@ import CIcon from '@coreui/icons-react'
 import { cilFire, cilBurger, cilFastfood, cilDrop, cilDelete } from '@coreui/icons'
 import ProgressionChart from './ProgressionChart'
 import { supabase } from '../../supabaseClient.js'
+import Model from 'react-body-highlighter'
 
 const Dashboard = () => {
   // ALL STATE MUST BE INSIDE THE COMPONENT!
@@ -31,6 +32,13 @@ const Dashboard = () => {
     protein: 150,
     carbs: 200,
     fat: 65,
+  })
+
+  const [profileStats, setProfileStats] = useState({
+    weight: 0,
+    smm: 0,
+    bmi: 0,
+    segmental: [0, 0, 0, 0],
   })
 
   const handleDeleteMeal = async (id) => {
@@ -84,6 +92,13 @@ const Dashboard = () => {
           protein: profileData[0].target_protein,
           carbs: profileData[0].target_carbs,
           fat: profileData[0].target_fat,
+        })
+
+        setProfileStats({
+          weight: profileData[0].current_weight_lbs || 0,
+          smm: profileData[0].skeletal_muscle_mass || 0,
+          bmi: profileData[0].bmi || 0,
+          segmental: profileData[0].segmental_lean_data || [0, 0, 0, 0],
         })
       } else if (profileError) {
         console.error('Error fetching profile:', profileError)
@@ -207,7 +222,7 @@ const Dashboard = () => {
       title: 'Calories',
       icon: cilFire,
       percent: Math.min(Math.round((dailyTotals.calories / macroTargets.calories) * 100) || 0, 100),
-      value: `${dailyTotals.calories} / ${macroTargets.calories}`,
+      value: `${Math.round(dailyTotals.calories)} / ${Math.round(macroTargets.calories)}`,
       color: 'info',
     },
     {
@@ -510,6 +525,76 @@ const Dashboard = () => {
                     </CTableBody>
                   </CTable>
                 </CCardBody>
+              </CRow>
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+      <CRow>
+        <CCol xs>
+          <CCard className="mb-4 bg-dark border-secondary">
+            <CCardBody>
+              <CRow>
+                <CCol xs={12}>
+                  <h4 id="body-comp" className="card-title mb-4 text-white">
+                    Body Composition
+                  </h4>
+                </CCol>
+              </CRow>
+
+              <CRow className="align-items-center text-center text-white mt-3">
+                {/* Left Side of Screen (Person's Right Limbs) */}
+                <CCol xs={4}>
+                  <div className="mb-5">
+                    <div className="text-secondary small text-uppercase fw-semibold">Right Arm</div>
+                    <div className="fw-bold fs-5 text-info">{profileStats.segmental[1]}%</div>
+                  </div>
+                  <div>
+                    <div className="text-secondary small text-uppercase fw-semibold">Right Leg</div>
+                    <div className="fw-bold fs-5 text-info">{profileStats.segmental[3]}%</div>
+                  </div>
+                </CCol>
+
+                {/* Center SVG Model */}
+                <CCol xs={4} className="d-flex justify-content-center">
+                  <Model
+                    data={[]}
+                    style={{ width: '12rem' }}
+                    bodyColor="#4a4a4a" // Matches your dark theme[cite: 1]
+                  />
+                </CCol>
+
+                {/* Right Side of Screen (Person's Left Limbs) */}
+                <CCol xs={4}>
+                  <div className="mb-5">
+                    <div className="text-secondary small text-uppercase fw-semibold">Left Arm</div>
+                    <div className="fw-bold fs-5 text-info">{profileStats.segmental[0]}%</div>
+                  </div>
+                  <div>
+                    <div className="text-secondary small text-uppercase fw-semibold">Left Leg</div>
+                    <div className="fw-bold fs-5 text-info">{profileStats.segmental[2]}%</div>
+                  </div>
+                </CCol>
+              </CRow>
+
+              <hr className="border-secondary mt-5 mb-4" />
+
+              {/* Bottom Core Metrics Grid */}
+              <CRow className="text-center text-white pb-2">
+                <CCol xs={4}>
+                  <div className="text-secondary small text-uppercase fw-semibold">Weight</div>
+                  <div className="fw-bold fs-6">{profileStats.weight} lbs</div>
+                </CCol>
+                <CCol xs={4}>
+                  <div className="text-secondary small text-uppercase fw-semibold">
+                    Muscle (SMM)
+                  </div>
+                  <div className="fw-bold fs-6">{profileStats.smm} kg</div>
+                </CCol>
+                <CCol xs={4}>
+                  <div className="text-secondary small text-uppercase fw-semibold">BMI</div>
+                  <div className="fw-bold fs-6">{profileStats.bmi}</div>
+                </CCol>
               </CRow>
             </CCardBody>
           </CCard>
