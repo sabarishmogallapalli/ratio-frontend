@@ -310,7 +310,47 @@ const Dashboard = () => {
                 <option value="sissy squat">Sissy Squat</option>
                 <option value="standing calf raise">Standing Calf Raise</option>
 
-                {/* Add more options here as needed */}
+                <option value="bayesian cable curl">Bayesian Cable Curl</option>
+                <option value="seated db french press">Seated Dumbbell French Press</option>
+                <option value="bottom-2/3 constant tension preacher curl">
+                  bottom-2/3 constant tension preacher curl
+                </option>
+                <option value="cable triceps kickback">cable triceps kickback</option>
+                <option value="cable crunch">cable crunch</option>
+
+                <option value="machine lateral raise">machine lateral raise</option>
+                <option value="dumbbell lateral raise">dumbbell lateral raise</option>
+                <option value="smith machine shoulder press">smith machine shoulder press</option>
+                <option value="standing dumbbell arnold press">
+                  standing dumbbell arnold press
+                </option>
+                <option value="dumbbell lat pullover">dumbbell lat pullover</option>
+                <option value="machine lat pullover">machine lat pullover</option>
+                <option value="lat-focused cable row">lat-focused cable row</option>
+                <option value="elbows-in 1-arm db row">elbows-in 1-arm db row</option>
+                <option value="half-kneeling 1-arm lat pulldown">
+                  half-kneeling 1-arm lat pulldown
+                </option>
+                <option value="reverse nordics">reverse nordics</option>
+                <option value="single-leg leg press">single-leg leg press</option>
+                <option value="machine hip abduction">machine hip abduction</option>
+                <option value="cable hip abduction">cable hip abduction</option>
+                <option value="lateral band walk">lateral band walk</option>
+                <option value="barbell hip thrust">barbell hip thrust</option>
+                <option value="single-leg dumbbell hip thrust">
+                  single-leg dumbbell hip thrust
+                </option>
+                <option value="low incline db flye">low incline db flye</option>
+                <option value="low-to-high cable crossover">low-to-high cable crossover</option>
+                <option value="chest press machine (incline if upper pecs lagging)">
+                  chest press machine (incline if upper pecs lagging)
+                </option>
+                <option value="dumbbell chest press (incline if upper pecs lagging)">
+                  dumbbell chest press (incline if upper pecs lagging)
+                </option>
+                <option value="plate-loaded neck curls">plate-loaded neck curls</option>
+                <option value="head harness neck extension">head harness neck extension</option>
+                <option value="plate-loaded neck extension">plate-loaded neck extension</option>
               </CFormSelect>
               {/* <CButtonGroup className="float-end me-3">
                 {['Day', 'Week', 'Month', 'Year'].map((value) => (
