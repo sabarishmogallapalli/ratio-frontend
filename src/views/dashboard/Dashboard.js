@@ -351,6 +351,23 @@ const Dashboard = () => {
                 <option value="plate-loaded neck curls">plate-loaded neck curls</option>
                 <option value="head harness neck extension">head harness neck extension</option>
                 <option value="plate-loaded neck extension">plate-loaded neck extension</option>
+
+                <option value="bayesian cable curl">bayesian cable curl</option>
+                <option value="seated db french press">seated db french press</option>
+                <option value="bottom-2/3 constant tension preacher curl">
+                  bottom-2/3 constant tension preacher curl
+                </option>
+                <option value="cable triceps kickback">cable triceps kickback</option>
+                <option value="cable crunch">cable crunch</option>
+                <option value="slow-eccentric ez-bar skull crusher">
+                  slow-eccentric ez-bar skull crusher
+                </option>
+                <option value="slow-eccentric bayesian curl">slow-eccentric bayesian curl</option>
+                <option value="triceps diverging pressdown (long rope or 2 ropes)">
+                  triceps diverging pressdown (long rope or 2 ropes)
+                </option>
+                <option value="reverse grip cable curl">reverse grip cable curl</option>
+                <option value="roman chair leg raise">roman chair leg raise</option>
               </CFormSelect>
               {/* <CButtonGroup className="float-end me-3">
                 {['Day', 'Week', 'Month', 'Year'].map((value) => (
