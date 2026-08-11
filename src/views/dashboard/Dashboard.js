@@ -275,6 +275,7 @@ const Dashboard = () => {
                 onChange={(e) => setSelectedExercise(e.target.value)}
                 className="text-white"
               >
+                {/* Phase 1 */}
                 <option value="cuffed behind-the-back lateral raise">
                   Cuffed Behind-The-Back Lateral Raise
                 </option>
@@ -307,6 +308,7 @@ const Dashboard = () => {
                 <option value="lying leg curl">Lying Leg Curl</option>
                 <option value="leg press">Leg Press</option>
                 <option value="paused barbell rdl">Paused Barbell Rdl</option>
+                {/* Machine Hip Adduction */}
                 <option value="sissy squat">Sissy Squat</option>
                 <option value="standing calf raise">Standing Calf Raise</option>
 
@@ -318,22 +320,58 @@ const Dashboard = () => {
                 <option value="cable triceps kickback">cable triceps kickback</option>
                 <option value="cable crunch">cable crunch</option>
 
+                {/* PHASE 2 */}
+                <option value="lat-focused cable row">lat-focused cable row</option>
+                <option value="low incline db press">low incline db press</option>
+                <option value="chest-supported t-bar row + kelso shrug">chest-supported t-bar row + kelso shrug</option>
+                <option value="bent-over cable pec flye (w/ integrated partials)">bent-over cable pec flye (w/ integrated partials)</option>
+                <option value="1-arm lat pull-in">1-arm lat pull-in</option>
+                <option value="dual-cable triceps press">dual-cable triceps press</option>
+                {/* # "seated leg curl" */}
+                {/* # "machine hip adduction" */}
+                <option value="smith machine squat">smith machine squat</option>
+                {/* # "leg extension" */}
+                <option value="db calf jumps">db calf jumps</option>
+                <option value="dual-handle lat pulldown (mid-back + lats)">dual-handle lat pulldown (mid-back + lats)</option>
+                <option value="seated db shoulder press">seated db shoulder press</option>
+                {/* # "chest-supported machine row" */}
+                <option value="decline machine chest press">decline machine chest press</option>
+                <option value="concentration cable curl">concentration cable curl</option>
+                <option value="cross-body cable y-raise">cross-body cable y-raise</option>
+                <option value="rear delt 45 degrees cable flye">rear delt 45 degrees cable flye</option>
+                {/* # "lying leg curl" */}
+                <option value="smith machine reverse lunge">smith machine reverse lunge</option>
+                <option value="glute-ham raise">glute-ham raise</option>
+                {/* # "machine hip adduction" */}
+                <option value="machine hip abduction">machine hip abduction</option>
+                {/* # "standing calf raise" */}
+                <option value="slow-eccentric ez-bar skull crusher">
+                  slow-eccentric ez-bar skull crusher
+                </option>
+                <option value="slow-eccentric bayesian curl">slow-eccentric bayesian curl</option>
+                <option value="triceps diverging pressdown (long rope or 2 ropes)">
+                  triceps diverging pressdown (long rope or 2 ropes)
+                </option>
+                <option value="reverse grip cable curl">reverse grip cable curl</option>
+                <option value="roman chair leg raise">roman chair leg raise</option>
+
+
+                {/* WEAK POINTS */}
                 <option value="machine lateral raise">machine lateral raise</option>
                 <option value="dumbbell lateral raise">dumbbell lateral raise</option>
                 <option value="smith machine shoulder press">smith machine shoulder press</option>
                 <option value="standing dumbbell arnold press">
                   standing dumbbell arnold press
                 </option>
+                <option value="cable lat prayer">Cable lat prayer</option>
                 <option value="dumbbell lat pullover">dumbbell lat pullover</option>
                 <option value="machine lat pullover">machine lat pullover</option>
-                <option value="lat-focused cable row">lat-focused cable row</option>
                 <option value="elbows-in 1-arm db row">elbows-in 1-arm db row</option>
                 <option value="half-kneeling 1-arm lat pulldown">
                   half-kneeling 1-arm lat pulldown
                 </option>
                 <option value="reverse nordics">reverse nordics</option>
                 <option value="single-leg leg press">single-leg leg press</option>
-                <option value="machine hip abduction">machine hip abduction</option>
                 <option value="cable hip abduction">cable hip abduction</option>
                 <option value="lateral band walk">lateral band walk</option>
                 <option value="barbell hip thrust">barbell hip thrust</option>
@@ -351,23 +389,6 @@ const Dashboard = () => {
                 <option value="plate-loaded neck curls">plate-loaded neck curls</option>
                 <option value="head harness neck extension">head harness neck extension</option>
                 <option value="plate-loaded neck extension">plate-loaded neck extension</option>
-
-                <option value="bayesian cable curl">bayesian cable curl</option>
-                <option value="seated db french press">seated db french press</option>
-                <option value="bottom-2/3 constant tension preacher curl">
-                  bottom-2/3 constant tension preacher curl
-                </option>
-                <option value="cable triceps kickback">cable triceps kickback</option>
-                <option value="cable crunch">cable crunch</option>
-                <option value="slow-eccentric ez-bar skull crusher">
-                  slow-eccentric ez-bar skull crusher
-                </option>
-                <option value="slow-eccentric bayesian curl">slow-eccentric bayesian curl</option>
-                <option value="triceps diverging pressdown (long rope or 2 ropes)">
-                  triceps diverging pressdown (long rope or 2 ropes)
-                </option>
-                <option value="reverse grip cable curl">reverse grip cable curl</option>
-                <option value="roman chair leg raise">roman chair leg raise</option>
               </CFormSelect>
               {/* <CButtonGroup className="float-end me-3">
                 {['Day', 'Week', 'Month', 'Year'].map((value) => (
