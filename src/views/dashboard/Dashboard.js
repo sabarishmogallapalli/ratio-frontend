@@ -323,8 +323,12 @@ const Dashboard = () => {
                 {/* PHASE 2 */}
                 <option value="lat-focused cable row">lat-focused cable row</option>
                 <option value="low incline db press">low incline db press</option>
-                <option value="chest-supported t-bar row + kelso shrug">chest-supported t-bar row + kelso shrug</option>
-                <option value="bent-over cable pec flye (w/ integrated partials)">bent-over cable pec flye (w/ integrated partials)</option>
+                <option value="chest-supported t-bar row + kelso shrug">
+                  chest-supported t-bar row + kelso shrug
+                </option>
+                <option value="bent-over cable pec flye (w/ integrated partials)">
+                  bent-over cable pec flye (w/ integrated partials)
+                </option>
                 <option value="1-arm lat pull-in">1-arm lat pull-in</option>
                 <option value="dual-cable triceps press">dual-cable triceps press</option>
                 {/* # "seated leg curl" */}
@@ -332,13 +336,17 @@ const Dashboard = () => {
                 <option value="smith machine squat">smith machine squat</option>
                 {/* # "leg extension" */}
                 <option value="db calf jumps">db calf jumps</option>
-                <option value="dual-handle lat pulldown (mid-back + lats)">dual-handle lat pulldown (mid-back + lats)</option>
+                <option value="dual-handle lat pulldown (mid-back + lats)">
+                  dual-handle lat pulldown (mid-back + lats)
+                </option>
                 <option value="seated db shoulder press">seated db shoulder press</option>
                 {/* # "chest-supported machine row" */}
                 <option value="decline machine chest press">decline machine chest press</option>
                 <option value="concentration cable curl">concentration cable curl</option>
                 <option value="cross-body cable y-raise">cross-body cable y-raise</option>
-                <option value="rear delt 45 degrees cable flye">rear delt 45 degrees cable flye</option>
+                <option value="rear delt 45 degrees cable flye">
+                  rear delt 45 degrees cable flye
+                </option>
                 {/* # "lying leg curl" */}
                 <option value="smith machine reverse lunge">smith machine reverse lunge</option>
                 <option value="glute-ham raise">glute-ham raise</option>
@@ -354,7 +362,6 @@ const Dashboard = () => {
                 </option>
                 <option value="reverse grip cable curl">reverse grip cable curl</option>
                 <option value="roman chair leg raise">roman chair leg raise</option>
-
 
                 {/* WEAK POINTS */}
                 <option value="machine lateral raise">machine lateral raise</option>
