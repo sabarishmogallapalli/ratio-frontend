@@ -622,7 +622,7 @@ const Dashboard = () => {
               <CRow>
                 <CCol xs={12}>
                   <h4 id="body-comp" className="card-title mb-4 text-white">
-                    Body Composition
+                    Body Composition - {new Date(profileStats.created_at).toLocaleDateString()}
                   </h4>
                 </CCol>
               </CRow>
