@@ -323,8 +323,8 @@ const Dashboard = () => {
                 {/* PHASE 2 */}
                 <option value="lat-focused cable row">lat-focused cable row</option>
                 <option value="low incline db press">low incline db press</option>
-                <option value="chest-supported t-bar row + kelso shrug">
-                  chest-supported t-bar row + kelso shrug
+                <option value="machine chest-supported row + kelso shrug">
+                  machine chest-supported row + kelso shrug
                 </option>
                 <option value="bent-over cable pec flye (w/ integrated partials)">
                   bent-over cable pec flye (w/ integrated partials)
@@ -622,7 +622,10 @@ const Dashboard = () => {
               <CRow>
                 <CCol xs={12}>
                   <h4 id="body-comp" className="card-title mb-4 text-white">
-                    Body Composition - {new Date(profileStats.created_at).toLocaleDateString()}
+                    Body Composition -{' '}
+                    {profileStats?.created_at
+                      ? new Date(profileStats.created_at).toLocaleDateString()
+                      : 'No date available'}
                   </h4>
                 </CCol>
               </CRow>
