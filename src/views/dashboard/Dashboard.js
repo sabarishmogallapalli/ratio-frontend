@@ -300,8 +300,10 @@ const Dashboard = () => {
                 <option value="machine shoulder press">Machine Shoulder Press</option>
                 <option value="assisted pull-up">Assisted Pull-Up</option>
                 <option value="paused assisted dip">Paused Assisted Dip</option>
-                <option value="inverse db zottman curl">Inverse Dumbbell Zottman Curl</option>
-                <option value="super-rom db lateral raise">Super-Rom Dumbbell Lateral Raise</option>
+                <option value="inverse dumbbell zottman curl">Inverse Dumbbell Zottman Curl</option>
+                <option value="super-rom dumbbell lateral raise">
+                  Super-Rom Dumbbell Lateral Raise
+                </option>
                 <option value="cable reverse fly (mechanical dropset)">
                   Cable Reverse Fly (Mechanical Dropset)
                 </option>
@@ -313,7 +315,7 @@ const Dashboard = () => {
                 <option value="seated calf raise">Seated Calf Raise</option>
 
                 <option value="bayesian cable curl">Bayesian Cable Curl</option>
-                <option value="seated db french press">Seated Dumbbell French Press</option>
+                <option value="seated dumbbell french press">Seated Dumbbell French Press</option>
                 <option value="bottom-2/3 constant tension preacher curl">
                   bottom-2/3 constant tension preacher curl
                 </option>
@@ -322,7 +324,7 @@ const Dashboard = () => {
 
                 {/* PHASE 2 */}
                 <option value="lat-focused cable row">lat-focused cable row</option>
-                <option value="low incline db press">low incline db press</option>
+                <option value="low incline dumbbell press">low incline db press</option>
                 <option value="machine chest-supported row + kelso shrug">
                   machine chest-supported row + kelso shrug
                 </option>
@@ -335,11 +337,13 @@ const Dashboard = () => {
                 {/* # "machine hip adduction" */}
                 <option value="smith machine squat">smith machine squat</option>
                 {/* # "leg extension" */}
-                <option value="db calf jumps">db calf jumps</option>
+                <option value="dumbbell calf jumps">dumbbell calf jumps</option>
                 <option value="dual-handle lat pulldown (mid-back + lats)">
                   dual-handle lat pulldown (mid-back + lats)
                 </option>
-                <option value="seated db shoulder press">seated db shoulder press</option>
+                <option value="seated dumbbell shoulder press">
+                  seated dumbbell shoulder press
+                </option>
                 {/* # "chest-supported machine row" */}
                 <option value="decline machine chest press">decline machine chest press</option>
                 <option value="concentration cable curl">concentration cable curl</option>
@@ -385,7 +389,7 @@ const Dashboard = () => {
                 <option value="single-leg dumbbell hip thrust">
                   single-leg dumbbell hip thrust
                 </option>
-                <option value="low incline db flye">low incline db flye</option>
+                <option value="low incline dumbbell flye">low incline dumbbell flye</option>
                 <option value="low-to-high cable crossover">low-to-high cable crossover</option>
                 <option value="chest press machine (incline if upper pecs lagging)">
                   chest press machine (incline if upper pecs lagging)
