@@ -310,7 +310,7 @@ const Dashboard = () => {
                 <option value="paused barbell rdl">Paused Barbell Rdl</option>
                 {/* Machine Hip Adduction */}
                 <option value="sissy squat">Sissy Squat</option>
-                <option value="standing calf raise">Standing Calf Raise</option>
+                <option value="seated calf raise">Seated Calf Raise</option>
 
                 <option value="bayesian cable curl">Bayesian Cable Curl</option>
                 <option value="seated db french press">Seated Dumbbell French Press</option>
