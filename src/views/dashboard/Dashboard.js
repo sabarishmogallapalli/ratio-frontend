@@ -39,6 +39,7 @@ const Dashboard = () => {
     smm: 0,
     bmi: 0,
     segmental: [0, 0, 0, 0],
+    created_at: null,
   })
 
   const handleDeleteMeal = async (id) => {
@@ -84,6 +85,7 @@ const Dashboard = () => {
       const { data: profileData, error: profileError } = await supabase
         .from('user_profiles')
         .select('*')
+        .order('created_at', { ascending: true })
         .limit(1)
 
       if (!profileError && profileData && profileData.length > 0) {
@@ -99,6 +101,7 @@ const Dashboard = () => {
           smm: profileData[0].skeletal_muscle_mass || 0,
           bmi: profileData[0].bmi || 0,
           segmental: profileData[0].segmental_lean_data || [0, 0, 0, 0],
+          created_at: profileData[0].created_at,
         })
       } else if (profileError) {
         console.error('Error fetching profile:', profileError)
@@ -212,6 +215,7 @@ const Dashboard = () => {
       fetchFoodLogs()
       fetchWeeklyFoodLogs()
       fetchUserProfile()
+      fetchProgression()
     }, 5000)
 
     return () => clearInterval(interval)
@@ -457,8 +461,8 @@ const Dashboard = () => {
           >
             <CTableHead className="text-nowrap">
               <CTableRow>
-                <CTableHeaderCell className="bg-black text-white">Exercise Log</CTableHeaderCell>
-                <CTableHeaderCell className="bg-black text-white">Activity</CTableHeaderCell>
+                <CTableHeaderCell className="bg-black text-white">Set Log</CTableHeaderCell>
+                <CTableHeaderCell className="bg-black text-white">Date</CTableHeaderCell>
                 <CTableHeaderCell className="bg-black text-white"></CTableHeaderCell>
               </CTableRow>
             </CTableHead>
@@ -627,9 +631,9 @@ const Dashboard = () => {
                 <CCol xs={12}>
                   <h4 id="body-comp" className="card-title mb-4 text-white">
                     Body Composition -{' '}
-                    {profileStats?.created_at
+                    {profileStats.created_at
                       ? new Date(profileStats.created_at).toLocaleDateString()
-                      : 'No date available'}
+                      : 'Loading...'}
                   </h4>
                 </CCol>
               </CRow>
