@@ -100,6 +100,7 @@ const Dashboard = () => {
           weight: profileData[0].current_weight_lbs || 0,
           smm: profileData[0].skeletal_muscle_mass || 0,
           bmi: profileData[0].bmi || 0,
+          pbf: profileData[0].pbf || 0,
           segmental: profileData[0].segmental_lean_data || [0, 0, 0, 0],
           created_at: profileData[0].created_at,
         })
@@ -280,6 +281,9 @@ const Dashboard = () => {
                 className="text-white"
               >
                 {/* Phase 1 */}
+                <option label="Phase 1 Upper 1" disabled="true">
+                  Phase 1 Upper 1
+                </option>
                 <option value="cuffed behind-the-back lateral raise">
                   Cuffed Behind-The-Back Lateral Raise
                 </option>
@@ -295,11 +299,17 @@ const Dashboard = () => {
                 <option value="pec deck (with integrated partials)">
                   Pec Deck (With Integrated Partials)
                 </option>
+                <option label="Phase 1 Lower 1" disabled="true">
+                  Phase 1 Lower 1
+                </option>
                 <option value="seated leg curl">Seated Leg Curl</option>
                 <option value="machine hip adduction">Machine Hip Adduction</option>
                 <option value="hack squat">Hack Squat</option>
                 <option value="leg extension">Leg Extension</option>
                 <option value="leg press calf press">Leg Press Calf Press</option>
+                <option label="Phase 1 Upper 2" disabled="true">
+                  Phase 1 Upper 2
+                </option>
                 <option value="super-rom overhand cable row">Super-Rom Overhand Cable Row</option>
                 <option value="machine shoulder press">Machine Shoulder Press</option>
                 <option value="assisted pull-up">Assisted Pull-Up</option>
@@ -311,13 +321,18 @@ const Dashboard = () => {
                 <option value="cable reverse fly (mechanical dropset)">
                   Cable Reverse Fly (Mechanical Dropset)
                 </option>
+                <option label="Phase 1 Lower 2" disabled="true">
+                  Phase 1 Lower 2
+                </option>
                 <option value="lying leg curl">Lying Leg Curl</option>
                 <option value="leg press">Leg Press</option>
                 <option value="paused barbell rdl">Paused Barbell Rdl</option>
                 {/* Machine Hip Adduction */}
                 <option value="sissy squat">Sissy Squat</option>
                 <option value="seated calf raise">Seated Calf Raise</option>
-
+                <option label="Phase 1 Arms" disabled="true">
+                  Phase 1 Arms
+                </option>
                 <option value="bayesian cable curl">Bayesian Cable Curl</option>
                 <option value="seated dumbbell french press">Seated Dumbbell French Press</option>
                 <option value="bottom-2/3 constant tension preacher curl">
@@ -325,85 +340,119 @@ const Dashboard = () => {
                 </option>
                 <option value="cable triceps kickback">cable triceps kickback</option>
                 <option value="cable crunch">cable crunch</option>
-
                 {/* PHASE 2 */}
-                <option value="lat-focused cable row">lat-focused cable row</option>
-                <option value="low incline dumbbell press">low incline db press</option>
+                <option label="Phase 2 Upper 1" disabled="true">
+                  Phase 2 Upper 1
+                </option>
+                <option value="lat-focused cable row">Lat-Focused Cable Row</option>
+                <option value="low incline dumbbell press">Low Incline Dumbbell Press</option>
                 <option value="machine chest-supported row + kelso shrug">
-                  machine chest-supported row + kelso shrug
+                  Machine Chest-Supported Row + Kelso Shrug
                 </option>
                 <option value="bent-over cable pec flye (w/ integrated partials)">
-                  bent-over cable pec flye (w/ integrated partials)
+                  Bent-Over Cable Pec Flye (w/ Integrated Partials)
                 </option>
-                <option value="1-arm lat pull-in">1-arm lat pull-in</option>
-                <option value="dual-cable triceps press">dual-cable triceps press</option>
+                <option value="1-arm lat pull-in">1-Arm Lat Pull-In</option>
+                <option value="dual-cable triceps press">Dual-Cable Triceps Press</option>
+                <option label="Phase 2 Lower 1" disabled="true">
+                  Phase 2 Lower 1
+                </option>
                 {/* # "seated leg curl" */}
                 {/* # "machine hip adduction" */}
-                <option value="smith machine squat">smith machine squat</option>
+                <option value="smith machine squat">Smith Machine Squat</option>
                 {/* # "leg extension" */}
-                <option value="dumbbell calf jumps">dumbbell calf jumps</option>
+                <option value="dumbbell calf jumps">Dumbbell Calf Jumps</option>
+                <option label="Phase 2 Upper 2" disabled="true">
+                  Phase 2 Upper 2
+                </option>
                 <option value="dual-handle lat pulldown (mid-back + lats)">
-                  dual-handle lat pulldown (mid-back + lats)
+                  Dual-Handle Lat Pulldown (Mid-Back + Lats)
                 </option>
                 <option value="seated dumbbell shoulder press">
-                  seated dumbbell shoulder press
+                  Seated Dumbbell Shoulder Press
                 </option>
                 {/* # "chest-supported machine row" */}
-                <option value="decline machine chest press">decline machine chest press</option>
-                <option value="concentration cable curl">concentration cable curl</option>
-                <option value="cross-body cable y-raise">cross-body cable y-raise</option>
+                <option value="decline machine chest press">Decline Machine Chest Press</option>
+                <option value="concentration cable curl">Concentration Cable Curl</option>
+                <option value="cross-body cable y-raise">Cross-Body Cable Y-Raise</option>
                 <option value="rear delt 45 degrees cable flye">
-                  rear delt 45 degrees cable flye
+                  Rear Delt 45 Degrees Cable Flye
+                </option>
+                <option label="Phase 2 Lower 2" disabled="true">
+                  Phase 2 Lower 2
                 </option>
                 {/* # "lying leg curl" */}
-                <option value="smith machine reverse lunge">smith machine reverse lunge</option>
-                <option value="glute-ham raise">glute-ham raise</option>
+                <option value="smith machine reverse lunge">Smith Machine Reverse Lunge</option>
+                <option value="glute-ham raise">Glute-Ham Raise</option>
                 {/* # "machine hip adduction" */}
-                <option value="machine hip abduction">machine hip abduction</option>
+                <option value="machine hip abduction">Machine Hip Abduction</option>
                 {/* # "standing calf raise" */}
+                <option label="Phase 2 Arms" disabled="true">
+                  Phase 2 Arms
+                </option>
                 <option value="slow-eccentric ez-bar skull crusher">
-                  slow-eccentric ez-bar skull crusher
+                  Slow-Eccentric Ez-Bar Skull Crusher
                 </option>
-                <option value="slow-eccentric bayesian curl">slow-eccentric bayesian curl</option>
+                <option value="slow-eccentric bayesian curl">Slow-Eccentric Bayesian Curl</option>
                 <option value="triceps diverging pressdown (long rope or 2 ropes)">
-                  triceps diverging pressdown (long rope or 2 ropes)
+                  Triceps Diverging Pressdown (Long Rope or 2 Ropes)
                 </option>
-                <option value="reverse grip cable curl">reverse grip cable curl</option>
-                <option value="roman chair leg raise">roman chair leg raise</option>
-
+                <option value="reverse grip cable curl">Reverse Grip Cable Curl</option>
+                <option value="roman chair leg raise">Roman Chair Leg Raise</option>
                 {/* WEAK POINTS */}
-                <option value="machine lateral raise">machine lateral raise</option>
-                <option value="dumbbell lateral raise">dumbbell lateral raise</option>
-                <option value="smith machine shoulder press">smith machine shoulder press</option>
+                <option label="Weakpoints" disabled="true">
+                  Weakpoints
+                </option>
+                <option label="   Shoulders" disabled="true">
+                  Shoulders
+                </option>
+                <option value="machine lateral raise">Machine Lateral Raise</option>
+                <option value="dumbbell lateral raise">Dumbbell Lateral Raise</option>
+                <option value="smith machine shoulder press">Smith Machine Shoulder Press</option>
                 <option value="standing dumbbell arnold press">
-                  standing dumbbell arnold press
+                  Standing Dumbbell Arnold Press
                 </option>
-                <option value="cable lat prayer">Cable lat prayer</option>
-                <option value="dumbbell lat pullover">dumbbell lat pullover</option>
-                <option value="machine lat pullover">machine lat pullover</option>
-                <option value="elbows-in 1-arm db row">elbows-in 1-arm db row</option>
+                <option label="   Lats" disabled="true">
+                  Lats
+                </option>
+                <option value="cable lat prayer">Cable Lat Prayer</option>
+                <option value="dumbbell lat pullover">Dumbbell Lat Pullover</option>
+                <option value="machine lat pullover">Machine Lat Pullover</option>
+                <option value="elbows-in 1-arm db row">Elbows-In 1-Arm Dumbbell Row</option>
                 <option value="half-kneeling 1-arm lat pulldown">
-                  half-kneeling 1-arm lat pulldown
+                  Half-Kneeling 1-Arm Lat Pulldown
                 </option>
-                <option value="reverse nordics">reverse nordics</option>
-                <option value="single-leg leg press">single-leg leg press</option>
-                <option value="cable hip abduction">cable hip abduction</option>
-                <option value="lateral band walk">lateral band walk</option>
-                <option value="barbell hip thrust">barbell hip thrust</option>
+                <option label="   Quads" disabled="true">
+                  Quads
+                </option>
+                <option value="reverse nordics">Reverse Nordics</option>
+                <option value="single-leg leg press">Single-Leg Leg Press</option>
+                <option label="   Glutes" disabled="true">
+                  Glutes
+                </option>
+                <option value="cable hip abduction">Cable Hip Abduction</option>
+                <option value="lateral band walk">Lateral Band Walk</option>
+                <option value="barbell hip thrust">Barbell Hip Thrust</option>
                 <option value="single-leg dumbbell hip thrust">
-                  single-leg dumbbell hip thrust
+                  Single-Leg Dumbbell Hip Thrust
                 </option>
-                <option value="low incline dumbbell flye">low incline dumbbell flye</option>
-                <option value="low-to-high cable crossover">low-to-high cable crossover</option>
+                <option label="   Chest" disabled="true">
+                  Chest
+                </option>
+                <option value="low incline dumbbell flye">Low Incline Dumbbell Flye</option>
+                <option value="low-to-high cable crossover">Low-To-High Cable Crossover</option>
                 <option value="chest press machine (incline if upper pecs lagging)">
-                  chest press machine (incline if upper pecs lagging)
+                  Chest Press Machine (Incline If Upper Pecs Lagging)
                 </option>
                 <option value="dumbbell chest press (incline if upper pecs lagging)">
-                  dumbbell chest press (incline if upper pecs lagging)
+                  Dumbbell Chest Press (Incline If Upper Pecs Lagging)
                 </option>
-                <option value="plate-loaded neck curls">plate-loaded neck curls</option>
-                <option value="head harness neck extension">head harness neck extension</option>
-                <option value="plate-loaded neck extension">plate-loaded neck extension</option>
+                <option label="   Neck" disabled="true">
+                  Neck
+                </option>
+                <option value="plate-loaded neck curls">Plate-Loaded Neck Curls</option>
+                <option value="head harness neck extension">Head Harness Neck Extension</option>
+                <option value="plate-loaded neck extension">Plate-Loaded Neck Extension</option>
               </CFormSelect>
               {/* <CButtonGroup className="float-end me-3">
                 {['Day', 'Week', 'Month', 'Year'].map((value) => (
@@ -685,11 +734,13 @@ const Dashboard = () => {
                   <div className="text-secondary small text-uppercase fw-semibold">
                     Muscle (SMM)
                   </div>
-                  <div className="fw-bold fs-6">{profileStats.smm} kg</div>
+                  <div className="fw-bold fs-6">{profileStats.smm} lbs</div>
                 </CCol>
                 <CCol xs={4}>
-                  <div className="text-secondary small text-uppercase fw-semibold">BMI</div>
-                  <div className="fw-bold fs-6">{profileStats.bmi}</div>
+                  <div className="text-secondary small text-uppercase fw-semibold">
+                    Percent Body Fat (PBF)
+                  </div>
+                  <div className="fw-bold fs-6">{profileStats.pbf}</div>
                 </CCol>
               </CRow>
             </CCardBody>
