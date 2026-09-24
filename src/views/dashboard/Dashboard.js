@@ -38,6 +38,7 @@ const Dashboard = () => {
     weight: 0,
     smm: 0,
     bmi: 0,
+    pbf: 0,
     segmental: [0, 0, 0, 0],
     created_at: null,
   })
