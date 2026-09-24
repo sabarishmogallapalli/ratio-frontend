@@ -101,7 +101,7 @@ const Dashboard = () => {
           weight: profileData[0].current_weight_lbs || 0,
           smm: profileData[0].skeletal_muscle_mass || 0,
           bmi: profileData[0].bmi || 0,
-          pbf: profileData[0].pbf || 0,
+          pbf: profileData[0].body_fat_percentage || 0,
           segmental: profileData[0].segmental_lean_data || [0, 0, 0, 0],
           created_at: profileData[0].created_at,
         })
