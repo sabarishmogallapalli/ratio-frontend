@@ -5,7 +5,6 @@ import {
   CCardBody,
   CCardFooter,
   CCol,
-  CFormSelect,
   CProgress,
   CRow,
   CTable,
@@ -14,6 +13,15 @@ import {
   CTableHead,
   CTableHeaderCell,
   CTableRow,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CFormInput,
+  CModalBody,
+  CDropdown,
+  CDropdownToggle,
+  CListGroup,
+  CListGroupItem,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilFire, cilBurger, cilFastfood, cilDrop, cilDelete } from '@coreui/icons'
@@ -42,6 +50,10 @@ const Dashboard = () => {
     segmental: [0, 0, 0, 0],
     created_at: null,
   })
+
+  const [visible, setVisible] = useState(false)
+
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleDeleteMeal = async (id) => {
     const { error } = await supabase.from('food_logs').delete().eq('id', id)
@@ -195,7 +207,10 @@ const Dashboard = () => {
       if (weekData) {
         const weeklyMap = {}
         weekData.forEach((meal) => {
-          const dateKey = new Date(meal.created_at).toLocaleDateString('en-US', { weekday: 'long' })
+          const dateKey = new Date(meal.created_at).toLocaleDateString('en-US', {
+            weekday: 'long',
+            timeZone: 'America/Chicago',
+          })
           if (!weeklyMap[dateKey])
             weeklyMap[dateKey] = { calories: 0, protein: 0, carbs: 0, fat: 0 }
           weeklyMap[dateKey].calories += meal.calories || 0
@@ -276,185 +291,228 @@ const Dashboard = () => {
               </h4>
             </CCol>
             <CCol xs={12} sm={7}>
-              <CFormSelect
-                value={selectedExercise}
-                onChange={(e) => setSelectedExercise(e.target.value)}
-                className="text-white"
+              <CDropdown>
+                <CDropdownToggle
+                  color="secondary"
+                  onClick={() => setVisible(true)}
+                  className="text-capitalize"
+                >
+                  {selectedExercise || 'Select Exercise'}
+                </CDropdownToggle>
+              </CDropdown>
+              {/* <CSearchButton
+                onTrigger={() => setVisible(true)}
+                aria-label="Open search dialog"
+                aria-controls="search-button-modal"
+                shortcut="meta+/,ctrl+/"
+              /> */}
+              <CModal
+                visible={visible}
+                onClose={() => {
+                  setVisible(false)
+                  setSearchTerm('')
+                }}
+                aria-labelledby="search-button-modal-title"
               >
-                {/* Phase 1 */}
-                <option label="Phase 1 Upper 1" disabled="true">
-                  Phase 1 Upper 1
-                </option>
-                <option value="cuffed behind-the-back lateral raise">
-                  Cuffed Behind-The-Back Lateral Raise
-                </option>
-                <option value="cross-body lat pull-around">Cross-Body Lat Pull-Around</option>
-                <option value="low incline smith machine press">
-                  Low Incline Smith Machine Press
-                </option>
-                <option value="chest-supported machine row">Chest-Supported Machine Row</option>
-                <option value="overhead cable tricep extensions (bar)">
-                  Overhead Cable Tricep Extensions (Bar)
-                </option>
-                <option value="straight-bar lat prayer">Straight-Bar Lat Prayer</option>
-                <option value="pec deck (with integrated partials)">
-                  Pec Deck (With Integrated Partials)
-                </option>
-                <option label="Phase 1 Lower 1" disabled="true">
-                  Phase 1 Lower 1
-                </option>
-                <option value="seated leg curl">Seated Leg Curl</option>
-                <option value="machine hip adduction">Machine Hip Adduction</option>
-                <option value="hack squat">Hack Squat</option>
-                <option value="leg extension">Leg Extension</option>
-                <option value="leg press calf press">Leg Press Calf Press</option>
-                <option label="Phase 1 Upper 2" disabled="true">
-                  Phase 1 Upper 2
-                </option>
-                <option value="super-rom overhand cable row">Super-Rom Overhand Cable Row</option>
-                <option value="machine shoulder press">Machine Shoulder Press</option>
-                <option value="assisted pull-up">Assisted Pull-Up</option>
-                <option value="paused assisted dip">Paused Assisted Dip</option>
-                <option value="inverse dumbbell zottman curl">Inverse Dumbbell Zottman Curl</option>
-                <option value="super-rom dumbbell lateral raise">
-                  Super-Rom Dumbbell Lateral Raise
-                </option>
-                <option value="cable reverse fly (mechanical dropset)">
-                  Cable Reverse Fly (Mechanical Dropset)
-                </option>
-                <option label="Phase 1 Lower 2" disabled="true">
-                  Phase 1 Lower 2
-                </option>
-                <option value="lying leg curl">Lying Leg Curl</option>
-                <option value="leg press">Leg Press</option>
-                <option value="paused barbell rdl">Paused Barbell Rdl</option>
-                {/* Machine Hip Adduction */}
-                <option value="sissy squat">Sissy Squat</option>
-                <option value="seated calf raise">Seated Calf Raise</option>
-                <option label="Phase 1 Arms" disabled="true">
-                  Phase 1 Arms
-                </option>
-                <option value="bayesian cable curl">Bayesian Cable Curl</option>
-                <option value="seated dumbbell french press">Seated Dumbbell French Press</option>
-                <option value="bottom-2/3 constant tension preacher curl">
-                  bottom-2/3 constant tension preacher curl
-                </option>
-                <option value="cable triceps kickback">cable triceps kickback</option>
-                <option value="cable crunch">cable crunch</option>
-                {/* PHASE 2 */}
-                <option label="Phase 2 Upper 1" disabled="true">
-                  Phase 2 Upper 1
-                </option>
-                <option value="lat-focused cable row">Lat-Focused Cable Row</option>
-                <option value="low incline dumbbell press">Low Incline Dumbbell Press</option>
-                <option value="machine chest-supported row + kelso shrug">
-                  Machine Chest-Supported Row + Kelso Shrug
-                </option>
-                <option value="bent-over cable pec flye (w/ integrated partials)">
-                  Bent-Over Cable Pec Flye (w/ Integrated Partials)
-                </option>
-                <option value="1-arm lat pull-in">1-Arm Lat Pull-In</option>
-                <option value="dual-cable triceps press">Dual-Cable Triceps Press</option>
-                <option label="Phase 2 Lower 1" disabled="true">
-                  Phase 2 Lower 1
-                </option>
-                {/* # "seated leg curl" */}
-                {/* # "machine hip adduction" */}
-                <option value="smith machine squat">Smith Machine Squat</option>
-                {/* # "leg extension" */}
-                <option value="dumbbell calf jumps">Dumbbell Calf Jumps</option>
-                <option label="Phase 2 Upper 2" disabled="true">
-                  Phase 2 Upper 2
-                </option>
-                <option value="dual-handle lat pulldown (mid-back + lats)">
-                  Dual-Handle Lat Pulldown (Mid-Back + Lats)
-                </option>
-                <option value="seated dumbbell shoulder press">
-                  Seated Dumbbell Shoulder Press
-                </option>
-                {/* # "chest-supported machine row" */}
-                <option value="decline machine chest press">Decline Machine Chest Press</option>
-                <option value="concentration cable curl">Concentration Cable Curl</option>
-                <option value="cross-body cable y-raise">Cross-Body Cable Y-Raise</option>
-                <option value="rear delt 45 degrees cable flye">
-                  Rear Delt 45 Degrees Cable Flye
-                </option>
-                <option label="Phase 2 Lower 2" disabled="true">
-                  Phase 2 Lower 2
-                </option>
-                {/* # "lying leg curl" */}
-                <option value="smith machine reverse lunge">Smith Machine Reverse Lunge</option>
-                <option value="glute-ham raise">Glute-Ham Raise</option>
-                {/* # "machine hip adduction" */}
-                <option value="machine hip abduction">Machine Hip Abduction</option>
-                {/* # "standing calf raise" */}
-                <option label="Phase 2 Arms" disabled="true">
-                  Phase 2 Arms
-                </option>
-                <option value="slow-eccentric ez-bar skull crusher">
-                  Slow-Eccentric Ez-Bar Skull Crusher
-                </option>
-                <option value="slow-eccentric bayesian curl">Slow-Eccentric Bayesian Curl</option>
-                <option value="triceps diverging pressdown (long rope or 2 ropes)">
-                  Triceps Diverging Pressdown (Long Rope or 2 Ropes)
-                </option>
-                <option value="reverse grip cable curl">Reverse Grip Cable Curl</option>
-                <option value="roman chair leg raise">Roman Chair Leg Raise</option>
-                {/* WEAK POINTS */}
-                <option label="Weakpoints" disabled="true">
-                  Weakpoints
-                </option>
-                <option label="   Shoulders" disabled="true">
-                  Shoulders
-                </option>
-                <option value="machine lateral raise">Machine Lateral Raise</option>
-                <option value="dumbbell lateral raise">Dumbbell Lateral Raise</option>
-                <option value="smith machine shoulder press">Smith Machine Shoulder Press</option>
-                <option value="standing dumbbell arnold press">
-                  Standing Dumbbell Arnold Press
-                </option>
-                <option label="   Lats" disabled="true">
-                  Lats
-                </option>
-                <option value="cable lat prayer">Cable Lat Prayer</option>
-                <option value="dumbbell lat pullover">Dumbbell Lat Pullover</option>
-                <option value="machine lat pullover">Machine Lat Pullover</option>
-                <option value="elbows-in 1-arm db row">Elbows-In 1-Arm Dumbbell Row</option>
-                <option value="half-kneeling 1-arm lat pulldown">
-                  Half-Kneeling 1-Arm Lat Pulldown
-                </option>
-                <option label="   Quads" disabled="true">
-                  Quads
-                </option>
-                <option value="reverse nordics">Reverse Nordics</option>
-                <option value="single-leg leg press">Single-Leg Leg Press</option>
-                <option label="   Glutes" disabled="true">
-                  Glutes
-                </option>
-                <option value="cable hip abduction">Cable Hip Abduction</option>
-                <option value="lateral band walk">Lateral Band Walk</option>
-                <option value="barbell hip thrust">Barbell Hip Thrust</option>
-                <option value="single-leg dumbbell hip thrust">
-                  Single-Leg Dumbbell Hip Thrust
-                </option>
-                <option label="   Chest" disabled="true">
-                  Chest
-                </option>
-                <option value="low incline dumbbell flye">Low Incline Dumbbell Flye</option>
-                <option value="low-to-high cable crossover">Low-To-High Cable Crossover</option>
-                <option value="chest press machine (incline if upper pecs lagging)">
-                  Chest Press Machine (Incline If Upper Pecs Lagging)
-                </option>
-                <option value="dumbbell chest press (incline if upper pecs lagging)">
-                  Dumbbell Chest Press (Incline If Upper Pecs Lagging)
-                </option>
-                <option label="   Neck" disabled="true">
-                  Neck
-                </option>
-                <option value="plate-loaded neck curls">Plate-Loaded Neck Curls</option>
-                <option value="head harness neck extension">Head Harness Neck Extension</option>
-                <option value="plate-loaded neck extension">Plate-Loaded Neck Extension</option>
-              </CFormSelect>
+                <CModalHeader>
+                  <CModalTitle id="search-button-modal-title" className="w-100">
+                    <CFormInput
+                      type="search"
+                      placeholder="Search"
+                      aria-label="Search"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      autoFocus
+                    />
+                  </CModalTitle>
+                </CModalHeader>
+                <CModalBody
+                  style={{
+                    maxHeight: '400px',
+                    overflowY: 'auto',
+                  }}
+                >
+                  <CListGroup flush className="text-white">
+                    {[
+                      'cuffed behind-the-back lateral raise',
+                      'cross-body lat pull-around',
+                      'low incline smith machine press',
+                      'chest-supported machine row',
+                      'overhead cable tricep extensions (bar)',
+                      'straight-bar lat prayer',
+                      'pec deck (with integrated partials)',
+                      'seated leg curl',
+                      'machine hip adduction',
+                      'hack squat',
+                      'leg extension',
+                      'leg press calf press',
+                      'super-rom overhand cable row',
+                      'machine shoulder press',
+                      'assisted pull-up',
+                      'paused assisted dip',
+                      'inverse dumbbell zottman curl',
+                      'super-rom dumbbell lateral raise',
+                      'cable reverse fly (mechanical dropset on all sets)',
+                      'lying leg curl',
+                      'leg press',
+                      'paused barbell rdl',
+                      'sissy squat',
+                      'seated calf raise',
+                      'bayesian cable curl',
+                      'seated dumbbell french press',
+                      'bottom-2/3 constant tension preacher curl',
+                      'cable triceps kickback',
+                      'cable crunch',
+                      'lat-focused cable row',
+                      'low incline dumbbell press',
+                      'machine chest-supported row + kelso shrug',
+                      'bent-over cable pec flye (w/ integrated partials)',
+                      '1-arm lat pull-in',
+                      'dual-cable triceps press',
+                      'smith machine squat',
+                      'dumbbell calf jumps',
+                      'dual-handle lat pulldown (mid-back + lats)',
+                      'seated dumbbell shoulder press',
+                      'decline machine chest press',
+                      'concentration cable curl',
+                      'cross-body cable y-raise',
+                      'rear delt 45 degrees cable flye',
+                      'smith machine reverse lunge',
+                      'glute-ham raise',
+                      'machine hip abduction',
+                      'slow-eccentric ez-bar skull crusher',
+                      'slow-eccentric bayesian curl',
+                      'tricep diverging pressdown (long rope or 2 ropes)',
+                      'reverse grip cable curl',
+                      'roman chair leg raise',
+                      'machine lateral raise',
+                      'dumbbell lateral raise',
+                      'smith machine shoulder press',
+                      'standing dumbbell arnold press',
+                      'cable lat prayer',
+                      'dumbbell lat pullover',
+                      'machine lat pullover',
+                      'elbows-in 1-arm dumbbell row',
+                      'half-kneeling 1-arm lat pulldown',
+                      'reverse nordics',
+                      'single-leg leg press',
+                      'cable hip abduction',
+                      'lateral band walk',
+                      'barbell hip thrust',
+                      'single-leg dumbbell hip thrust',
+                      'low incline dumbbell flye',
+                      'low-to-high cable crossover',
+                      'chest press machine (incline or flat)',
+                      'dumbbell chest press (incline or flat)',
+                      'plate loaded neck curls',
+                      'head harness neck extension',
+                      'plate-loaded neck extension',
+
+                      // // Phase 1 Upper 1
+                      // 'cuffed behind-the-back lateral raise',
+                      // 'cross-body lat pull-around',
+                      // 'low incline smith machine press',
+                      // 'chest-supported machine row',
+                      // 'overhead cable tricep extensions (bar)',
+                      // 'straight-bar lat prayer',
+                      // 'pec deck (with integrated partials)',
+                      // // Phase 1 Lower 1
+                      // 'seated leg curl',
+                      // 'machine hip adduction',
+                      // 'hack squat',
+                      // 'leg extension',
+                      // 'leg press calf press',
+                      // // Phase 1 Upper 2
+                      // 'super-rom overhand cable row',
+                      // 'machine shoulder press',
+                      // 'assisted pull-up',
+                      // 'paused assisted dip',
+                      // 'inverse dumbbell zottman curl',
+                      // 'super-rom dumbbell lateral raise',
+                      // 'cable reverse fly (mechanical dropset)',
+                      // // Phase 1 Lower 2
+                      // 'lying leg curl',
+                      // 'leg press',
+                      // 'paused barbell rdl',
+                      // 'sissy squat',
+                      // 'seated calf raise',
+                      // // Phase 1 Arms
+                      // 'bayesian cable curl',
+                      // 'seated dumbbell french press',
+                      // 'bottom-2/3 constant tension preacher curl',
+                      // 'cable triceps kickback',
+                      // 'cable crunch',
+                      // // Phase 2 Upper 1
+                      // 'lat-focused cable row',
+                      // 'low incline dumbbell press',
+                      // 'machine chest-supported row + kelso shrug',
+                      // 'bent-over cable pec flye (w/ integrated partials)',
+                      // '1-arm lat pull-in',
+                      // 'dual-cable triceps press',
+                      // // Phase 2 Lower 1
+                      // 'smith machine squat',
+                      // 'dumbbell calf jumps',
+                      // // Phase 2 Upper 2
+                      // 'dual-handle lat pulldown (mid-back + lats)',
+                      // 'seated dumbbell shoulder press',
+                      // 'decline machine chest press',
+                      // 'concentration cable curl',
+                      // 'cross-body cable y-raise',
+                      // 'rear delt 45 degrees cable flye',
+                      // // Phase 2 Lower 2
+                      // 'smith machine reverse lunge',
+                      // 'glute-ham raise',
+                      // 'machine hip abduction',
+                      // // Phase 2 Arms
+                      // 'slow-eccentric ez-bar skull crusher',
+                      // 'slow-eccentric bayesian curl',
+                      // 'triceps diverging pressdown (long rope or 2 ropes)',
+                      // 'reverse grip cable curl',
+                      // 'roman chair leg raise',
+                      // // Weakpoints
+                      // 'machine lateral raise',
+                      // 'dumbbell lateral raise',
+                      // 'smith machine shoulder press',
+                      // 'standing dumbbell arnold press',
+                      // 'cable lat prayer',
+                      // 'dumbbell lat pullover',
+                      // 'machine lat pullover',
+                      // 'elbows-in 1-arm db row',
+                      // 'half-kneeling 1-arm lat pulldown',
+                      // 'reverse nordics',
+                      // 'single-leg leg press',
+                      // 'cable hip abduction',
+                      // 'lateral band walk',
+                      // 'barbell hip thrust',
+                      // 'single-leg dumbbell hip thrust',
+                      // 'low incline dumbbell flye',
+                      // 'low-to-high cable crossover',
+                      // 'chest press machine (incline if upper pecs lagging)',
+                      // 'dumbbell chest press (incline if upper pecs lagging)',
+                      // 'plate-loaded neck curls',
+                      // 'head harness neck extension',
+                      // 'plate-loaded neck extension',
+                    ]
+                      .filter((ex) => ex.toLowerCase().includes(searchTerm.toLowerCase()))
+                      .map((exercise, idx) => (
+                        <CListGroupItem
+                          key={idx}
+                          as="button"
+                          type="button"
+                          active={selectedExercise === exercise}
+                          className="d-flex justify-content-between align-items-center text-capitalize text-white"
+                          onClick={() => {
+                            setSelectedExercise(exercise)
+                            setVisible(false)
+                            setSearchTerm('')
+                          }}
+                        >
+                          {exercise}
+                        </CListGroupItem>
+                      ))}
+                  </CListGroup>
+                </CModalBody>
+              </CModal>
               {/* <CButtonGroup className="float-end me-3">
                 {['Day', 'Week', 'Month', 'Year'].map((value) => (
                   <CButton
