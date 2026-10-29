@@ -1,180 +1,90 @@
-# CoreUI Free React Admin Template (Create React App)[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?text=CoreUI%20-%20Free%React%204%20Admin%20Template%20&url=https://coreui.io&hashtags=bootstrap,admin,template,dashboard,panel,free,angular,react,vue)
+# Ratio Web Dashboard 📊🦾
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![@coreui coreui](https://img.shields.io/badge/@coreui%20-coreui-lightgrey.svg?style=flat-square)](https://github.com/coreui/coreui)
-[![npm package][npm-coreui-badge]][npm-coreui]
-[![NPM downloads][npm-coreui-download]][npm-coreui]
-[![@coreui react](https://img.shields.io/badge/@coreui%20-react-lightgrey.svg?style=flat-square)](https://github.com/coreui/react)
-[![npm package][npm-coreui-react-badge]][npm-coreui-react]
-[![NPM downloads][npm-coreui-react-download]][npm-coreui-react]  
+> A modern, MacroFactor-inspired SaaS web application providing analytical visualizations for hypertrophy volume progression, real-time macro allocation tracking, and InBody body composition modeling.
 
-[npm-coreui]: https://www.npmjs.com/package/@coreui/coreui
-[npm-coreui-badge]: https://img.shields.io/npm/v/@coreui/coreui.png?style=flat-square
-[npm-coreui-download]: https://img.shields.io/npm/dm/@coreui/coreui.svg?style=flat-square
-[npm-coreui-react]: https://www.npmjs.com/package/@coreui/react
-[npm-coreui-react-badge]: https://img.shields.io/npm/v/@coreui/react.png?style=flat-square
-[npm-coreui-react-download]: https://img.shields.io/npm/dm/@coreui/react.svg?style=flat-square
-[npm]: https://www.npmjs.com/package/@coreui/react
+[![React](https://img.shields.io/badge/React-18.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![CoreUI](https://img.shields.io/badge/CoreUI-Free_React-321C72?style=for-the-badge&logo=coreui&logoColor=white)](https://coreui.io/react/)
+[![Supabase](https://img.shields.io/badge/Supabase_JS-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-[![Bootstrap Admin Template](https://assets.coreui.io/products/coreui-free-bootstrap-admin-template-light-dark.webp)](https://coreui.io/product/free-react-admin-template/)
+---
 
-CoreUI is meant to be the UX game changer. Pure & transparent code is devoid of redundant components, so the app is light enough to offer ultimate user experience. This means mobile devices also, where the navigation is just as easy and intuitive as on a desktop or laptop. The CoreUI Layout API lets you customize your project for almost any device – be it Mobile, Web or WebApp – CoreUI covers them all!
+## 🌐 Live Application
+* **Production Web Dashboard:** [https://your-dashboard-domain.com](https://your-dashboard-domain.com)
+* **Backend API Repository:** [https://github.com/your-username/fitness-bot-backend](https://github.com/your-username/fitness-bot-backend)
 
-## Table of Contents
+---
 
-* [Versions](#versions)
-* [CoreUI PRO](#coreui-pro)
-* [CoreUI PRO React Admin Templates](#coreui-pro-react-admin-templates)
-* [Quick Start](#quick-start)
-* [Installation](#installation)
-* [Basic usage](#basic-usage)
-* [What's included](#whats-included)
-* [Documentation](#documentation)
-* [Versioning](#versioning)
-* [Creators](#creators)
-* [Community](#community)
-* [Support CoreUI Development](#support-coreui-development)
-* [Copyright and License](#copyright-and-license)
+## 🎯 Problem & Solution
 
-## Versions
+### The Problem
+Most fitness interfaces suffer from fragmented data presentation—isolating workout progress from daily nutritional adherence and structural body composition changes. Furthermore, frontend applications often fail to handle client-side time zones correctly, causing data logged late in the evening to bleed into the following calendar day.
 
-* [CoreUI Free Bootstrap Admin Template](https://github.com/coreui/coreui-free-bootstrap-admin-template)
-* [CoreUI Free Angular Admin Template](https://github.com/coreui/coreui-free-angular-admin-template)
-* [CoreUI Free React.js Admin Template (Vite)](https://github.com/coreui/coreui-free-react-admin-template)
-* [CoreUI Free React.js Admin Template (Create React App)](https://github.com/coreui/coreui-free-react-admin-template-cra)
-* [CoreUI Free Vue.js Admin Template](https://github.com/coreui/coreui-free-vue-admin-template)
+### The Solution
+Ratio Web Dashboard provides a single, high-density visualization engine built with React and CoreUI. It synchronizes with Supabase via realtime data fetching polling, provides a local-time-aware date state engine (`Intl.DateTimeFormat` locked to `America/Chicago`), and renders macro progress bars and body composition limb segment analyses in a clean dark-mode UI.
 
-## CoreUI PRO
+---
 
-* 💪  [CoreUI PRO Angular Admin Template](https://coreui.io/product/angular-dashboard-template/)
-* 💪  [CoreUI PRO Bootstrap Admin Template](https://coreui.io/product/bootstrap-dashboard-template/)
-* 💪  [CoreUI PRO React Admin Template](https://coreui.io/product/react-dashboard-template/)
-* 💪  [CoreUI PRO Vue Admin Template](https://coreui.io/product/vue-dashboard-template/)
+## 🎨 Key Features & UI Highlights
 
-## CoreUI PRO React Admin Templates
+* **Time-Zone-Aware Date Filtering:** Client state uses `en-CA` locale formatting locked to `America/Chicago` to prevent UTC date rollovers from distorting evening meal or set logs.
+* **MacroFactor-Style Visual Meters:** Proportional macro progress bars tracking real-time daily calories, protein, carbohydrates, and fats against target profile thresholds.
+* **Exercise Volume & Progression Charts:** Interactive historical progression graphs displaying load and volume changes across custom training phases.
+* **InBody Segmental Lean Visualizer:** Vector human model interface mapping upper and lower extremity lean mass percentages.
+* **Optimistic UI Updates & Polling:** Real-time synchronization interval updating exercise tables and food logs directly from Supabase changes every 5 seconds.
 
-| Default Theme | Light Theme |
-| --- | --- |
-| [![CoreUI PRO React Admin Template](https://coreui.io/images/templates/coreui_pro_default_light_dark.webp)](https://coreui.io/product/react-dashboard-template/?theme=default) | [![CoreUI PRO React Admin Template](https://coreui.io/images/templates/coreui_pro_light_light_dark.webp)](https://coreui.io/product/react-dashboard-template/?theme=light)|
+---
 
-| Default Theme v3 | Light Theme v3 |
-| --- | --- |
-| [![CoreUI PRO React Admin Template](https://coreui.io/images/templates/coreui_pro_default_v3_light_dark.webp)](https://coreui.io/product/react-dashboard-template/?theme=default-v3) | [![CoreUI PRO React Admin Template](https://coreui.io/images/templates/coreui_pro_light_v3_light_dark.webp)](https://coreui.io/product/react-dashboard-template/?theme=light)|
+## 🏗️ Technical Architecture & Data Management
 
-## Quick Start
-
-- [Download the latest release](https://github.com/coreui/coreui-free-react-admin-template-cra/archive/refs/heads/main.zip)
-- Clone the repo: `git clone https://github.com/coreui/coreui-free-react-admin-template-cra.git`
-
-### Installation
-
-``` bash
-$ npm install
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Dashboard Component                  │
+│                                                         │
+│  ┌───────────────────┐  ┌────────────────────────────┐  │
+│  │ Local Date State  │  │   Selected Exercise State  │  │
+│  │ (America/Chicago) │  │  ('Flat Dumbbell Press')   │  │
+│  └─────────┬─────────┘  └─────────────┬──────────────┘  │
+└────────────┼──────────────────────────┼─────────────────┘
+             │                          │
+             ▼                          ▼
+┌─────────────────────────────────────────────────────────┐
+│                  Supabase Web SDK Client                │
+│                                                         │
+│  • food_logs (gte / lte Day Range Filters)              │
+│  • exercise_logs (Historical Load Analytics)            │
+│  • user_profiles (Dynamic Macro Target Thresholds)      │
+└─────────────────────────────────────────────────────────┘
 ```
 
-or
+---
 
-``` bash
-$ yarn install
-```
+## 🛠️ Local Setup Instructions
 
-### Basic usage
+### Prerequisites
+* **Node.js:** `v16.x` or `v18.x`
+* **npm:** `v8.x` or higher
 
-``` bash
-# dev server with hot reload at http://localhost:3000
-$ npm start 
-```
-
-or 
-
-``` bash
-# dev server with hot reload at http://localhost:3000
-$ yarn start
-```
-
-Navigate to [http://localhost:3000](http://localhost:3000). The app will automatically reload if you change any of the source files.
-
-#### Build
-
-Run `build` to build the project. The build artifacts will be stored in the `build/` directory.
-
+### Step 1: Clone Repository
 ```bash
-# build for production with minification
-$ npm run build
+git clone https://github.com/your-username/coreui-free-react-admin-template-cra.git
+cd coreui-free-react-admin-template-cra
 ```
 
-or
-
+### Step 2: Install Dependencies
 ```bash
-# build for production with minification
-$ yarn build
+npm install
 ```
 
-## What's included
-
-Within the download you'll find the following directories and files, logically grouping common assets and providing both compiled and minified variations. You'll see something like this:
-
-```
-coreui-free-react-admin-template
-├── public/          # static files
-│   └── index.html   # html template
-│
-├── src/             # project root
-│   ├── assets/      # images, icons, etc.
-│   ├── components/  # common components - header, footer, sidebar, etc.
-│   ├── layouts/     # layout containers
-│   ├── scss/        # scss styles
-│   ├── views/       # application views
-│   ├── _nav.js      # sidebar navigation config
-│   ├── App.js
-│   ├── ...
-│   ├── index.js
-│   ├── routes.js    # routes config
-│   └── store.js     # template state example 
-│
-└── package.json
+### Step 3: Configure Environment Variables
+Create a `.env` file in the root directory:
+```env
+REACT_APP_SUPABASE_URL=https://your-supabase-project.supabase.co
+REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-## Documentation
-
-The documentation for the CoreUI Admin Template is hosted at our website [CoreUI for React](https://coreui.io/react/docs/templates/installation/)
-
-## Versioning
-
-For transparency into our release cycle and in striving to maintain backward compatibility, CoreUI Free Admin Template is maintained under [the Semantic Versioning guidelines](http://semver.org/).
-
-See [the Releases section of our project](https://github.com/coreui/coreui-free-react-admin-template/releases) for changelogs for each release version.
-
-## Creators
-
-**Łukasz Holeczek**
-
-* <https://twitter.com/lukaszholeczek>
-* <https://github.com/mrholek>
-
-**Andrzej Kopański**
-
-* <https://github.com/xidedix>
-
-**CoreUI Team**
-
-* <https://twitter.com/core_ui>
-* <https://github.com/coreui>
-* <https://github.com/orgs/coreui/people>
-
-## Community
-
-Get updates on CoreUI's development and chat with the project maintainers and community members.
-
-- Follow [@core_ui on Twitter](https://twitter.com/core_ui).
-- Read and subscribe to [CoreUI Blog](https://coreui.ui/blog/).
-
-## Support CoreUI Development
-
-CoreUI is an MIT-licensed open source project and is completely free to use. However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing. You can support development by buying the [CoreUI PRO](https://coreui.io/pricing/?framework=react&src=github-coreui-free-react-admin-template) or by becoming a sponsor via [Open Collective](https://opencollective.com/coreui/).
-
-## Copyright and License
-
-copyright 2024 creativeLabs Łukasz Holeczek.   
-
-Code released under [the MIT license](https://github.com/coreui/coreui-free-react-admin-template/blob/main/LICENSE).
+### Step 4: Run the Development Server
+```bash
+npm start
+```
+Open [http://localhost:3000](http://localhost:3000) to view the application in your browser.
