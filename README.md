@@ -1,4 +1,4 @@
-# Ratio Web Dashboard 📊🦾
+# Ratio Web Dashboard
 
 > A modern, MacroFactor-inspired SaaS web application providing analytical visualizations for hypertrophy volume progression, real-time macro allocation tracking, and InBody body composition modeling.
 
@@ -9,13 +9,13 @@
 
 ---
 
-## 🌐 Live Application
-* **Production Web Dashboard:** [https://your-dashboard-domain.com](https://your-dashboard-domain.com)
-* **Backend API Repository:** [https://github.com/your-username/fitness-bot-backend](https://github.com/your-username/fitness-bot-backend)
+## Live Application
+* **Production Web Dashboard:** [https://fitness-dashboard-frontend.vercel.app/#/dashboard](https://fitness-dashboard-frontend.vercel.app/#/dashboard)
+* **Backend API Repository:** [https://github.com/sabarishmogallapalli/fitness-bot-backend](https://github.com/sabarishmogallapalli/fitness-bot-backend)
 
 ---
 
-## 🎯 Problem & Solution
+## Problem & Solution
 
 ### The Problem
 Most fitness interfaces suffer from fragmented data presentation—isolating workout progress from daily nutritional adherence and structural body composition changes. Furthermore, frontend applications often fail to handle client-side time zones correctly, causing data logged late in the evening to bleed into the following calendar day.
@@ -25,7 +25,7 @@ Ratio Web Dashboard provides a single, high-density visualization engine built w
 
 ---
 
-## 🎨 Key Features & UI Highlights
+## Key Features & UI Highlights
 
 * **Time-Zone-Aware Date Filtering:** Client state uses `en-CA` locale formatting locked to `America/Chicago` to prevent UTC date rollovers from distorting evening meal or set logs.
 * **MacroFactor-Style Visual Meters:** Proportional macro progress bars tracking real-time daily calories, protein, carbohydrates, and fats against target profile thresholds.
@@ -35,7 +35,7 @@ Ratio Web Dashboard provides a single, high-density visualization engine built w
 
 ---
 
-## 🏗️ Technical Architecture & Data Management
+## Technical Architecture & Data Management
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -59,7 +59,7 @@ Ratio Web Dashboard provides a single, high-density visualization engine built w
 
 ---
 
-## 🛠️ Local Setup Instructions
+## Local Setup Instructions
 
 ### Prerequisites
 * **Node.js:** `v16.x` or `v18.x`
