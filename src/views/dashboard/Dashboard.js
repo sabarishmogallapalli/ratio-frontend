@@ -33,7 +33,9 @@ const Dashboard = () => {
   // ALL STATE MUST BE INSIDE THE COMPONENT!
   const [recentExercises, setRecentExercises] = useState([])
   const [weeklyTotals, setWeeklyTotals] = useState({})
-  const [selectedDate, setSelectedDate] = useState(new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Chicago' }).format(new Date()))
+  const [selectedDate, setSelectedDate] = useState(
+    new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Chicago' }).format(new Date())
+  )
 
   const [macroTargets, setMacroTargets] = useState({
     calories: 2500,
